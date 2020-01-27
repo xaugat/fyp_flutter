@@ -315,10 +315,14 @@ class RegistrationpageState extends State<Registrationpage> {
                                 var res = await CallApi().postData(data, 'signup');
                                 
                                 var body = jsonDecode(res.body);
+                                if(body['sucess']){
                                 print(body);
 
                                    setState(() {
                                   _isLoading = false;
                                 });
+                                }else{
+                                  _showMsg(body['sucess']);
+                                }
                               }
 }
