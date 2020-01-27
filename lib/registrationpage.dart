@@ -48,191 +48,248 @@ class RegistrationpageState extends State<Registrationpage> {
     loadData();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Form(
-        child: Container(
-          margin: EdgeInsets.only(top: 10),
-          child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center(
-                    child: Container(
-                      child: Image(
-                        height: 100,
-                        width: 100,
-                        image: AssetImage('images/alumnilogo.png'),
-                        color: Colors.blue[900],
+      body: ListView(
+        children:<Widget>[
+          Form(
+          child: Container(
+            margin: EdgeInsets.only(top: 10),
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Center(
+                      child: Container(
+                        child: Image(
+                          height: 100,
+                          width: 100,
+                          image: AssetImage('images/alumnilogo.png'),
+                          color: Colors.blue[900],
+                        ),
                       ),
+                      
+                    )
+                    ,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(child: Text('Register for new user', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)),
+                    ),
+                    TextFormField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Full Name",
+                        hintText: "Please enter your full name",
+                        
+                      ),
+                      // validator: (String value) {
+                      //   if (value.trim().isEmpty) {
+                      //     return 'Name cannot be empty*';
+                      //   }
+                      // },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Email*",
+                        hintText: "Please enter your valid email"
+                      ),
+                      // validator: (String value) {
+                      //   if (value.trim().isEmpty) {
+                      //     return 'Email address cannot be empty';
+                      //   }
+                      // },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        hintText: "Please enter your valid mobile number",
+                        labelText: "Phone*",
+                      ),
+                      // validator: (String value) {
+                      //   if (value.trim().isEmpty) {
+                      //     return 'Phone cannot be empty';
+                      //   }
+                      // },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        hintText: "College Symbol No.*",
+                      ),
+                      // validator: (String value) {
+                      //   if (value.trim().isEmpty) {
+                      //     return 'Symbol No cannot be empty';
+                      //   }
+                      // },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                     TextFormField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Password*",
+                        hintText: "Please create a Password"
+                      ),
+                    
+                    ),
+                     SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: passwordConfController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Password confirmation",
+                        hintText: "Password should match"
+                      ),
+                      // validator: (String value) {
+                      //   if (value.trim().isEmpty) {
+                      //     return 'Address cannot be empty';
+                      //   }
+                      // },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                   
+                     TextFormField(
+                      controller: roleController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "role*",
+                      ),
+                     ),
+                    SizedBox(
+                      height: 10,
                     ),
                     
-                  )
-                  ,
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(child: Text('Register for new user', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)),
-                  ),
-                  TextFormField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    Container(
+                      height: 50,
+                      width: 200,
+                      child: DropdownButton(
+                        value: selected,
+                        items: listDrop ,
+                        hint: Text('Select your gender'),
+                        onChanged: (value){
+                          selected = value;
+                          setState(() {
+                            
+                          });
+                        },
                       ),
-                      hintText: "Full Name",
-                      
-                    ),
-                    // validator: (String value) {
-                    //   if (value.trim().isEmpty) {
-                    //     return 'Name cannot be empty*';
-                    //   }
-                    // },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: "Email*",
-                    ),
-                    // validator: (String value) {
-                    //   if (value.trim().isEmpty) {
-                    //     return 'Email address cannot be empty';
-                    //   }
-                    // },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: "Phone*",
-                    ),
-                    // validator: (String value) {
-                    //   if (value.trim().isEmpty) {
-                    //     return 'Phone cannot be empty';
-                    //   }
-                    // },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: "College Symbol No.*",
-                    ),
-                    // validator: (String value) {
-                    //   if (value.trim().isEmpty) {
-                    //     return 'Symbol No cannot be empty';
-                    //   }
-                    // },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: passwordConfController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: "password confirmation",
-                    ),
-                    // validator: (String value) {
-                    //   if (value.trim().isEmpty) {
-                    //     return 'Address cannot be empty';
-                    //   }
-                    // },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: "Password*",
-                    ),
-                    // validator: (String value) {
-                    //   if (value.trim().isEmpty) {
-                    //     return 'Education cannot be empty';
-                    //   }
-                    // },
-                  ),
-                   TextFormField(
-                    controller: roleController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      hintText: "role*",
-                    ),
-                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  
-                  Container(
-                    height: 50,
-                    width: 200,
-                    child: DropdownButton(
-                      value: selected,
-                      items: listDrop ,
-                      hint: Text('Select your gender'),
-                      onChanged: (value){
-                        selected = value;
-                        setState(() {
-                          
-                        });
-                      },
+
                     ),
 
-                  ),
-                  
-                  
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Container(
-                        width: 430,
-                        height: 50,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          onPressed: () {
-                            _handleSubmit();
-                                                      },
-                                                      color: Colors.blueAccent,
-                                                      child: Text(
-                                                       _isLoading ? 'Registering..' : "Submit",
-                                                        style: TextStyle(
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Colors.white,
+                    SizedBox(
+                      height: 10,
+                    ),
+                     TextFormField(
+                      controller: roleController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Enter your achievements*",
+                        hintText: 'Achievement',
+                      ),
+                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                     TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Address*",
+                        hintText: "Enter your Recent Address"
+                      ),
+                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                     TextFormField(
+                      
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Job*",
+                        hintText: "Enter your profession"
+                      ),
+                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    
+                    
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Container(
+                          width: 430,
+                          height: 50,
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            onPressed: () {
+                              _handleSubmit();
+                                                        },
+                                                        color: Colors.blueAccent,
+                                                        child: Text(
+                                                         _isLoading ? 'Registering..' : "Submit",
+                                                          style: TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                            
-                                              /*
-                                       * For password textfield
-                                       */
-                                            ]),
+                              
+                                                /*
+                                         * For password textfield
+                                         */
+                                              ]),
+                                        ),
                                       ),
                                     ),
-                                  ),
+        ],
+      ),
                                 );
                               }
                             

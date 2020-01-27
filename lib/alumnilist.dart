@@ -16,7 +16,7 @@ class _AlumniListState extends State<AlumniList> {
   String accessToken;
   _AlumniListState(this.accessToken);
 
-   final String url = 'http://100.64.202.138:8000/api/auth/users';
+   final String url = 'http://192.168.0.114:8000/api/auth/users';
   
   List userData;
   List unfilterData;
@@ -116,12 +116,12 @@ class _AlumniListState extends State<AlumniList> {
                           leading: Icon(Icons.person),
                           title: Text("${userData[index]["name"]}"),
                           subtitle: Text("${userData[index]["email"]}"),
-                          trailing: Text("${userData[index]["roles_id"]}"),
+                          trailing: Text("${userData[index]["role"]["name"]}"),
                           onTap: (){
                                Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Userprofile(userData[index]['name'], userData[index]['email'], userData[index]['role_id']
+                                  builder: (context) => Userprofile(userData[index]['name'], userData[index]['email'], userData[index]["role"]["name"]
                                       )),
                             );
                           },

@@ -59,14 +59,14 @@ class MyProfileState extends State<MyProfile> {
       //     String bod = '{"api_token":"'+ accessToken+'"}';
       //  print("bodyR is $bod");
       http.Response response = await http.get(
-          "http://100.64.202.138:8000/api/auth/user",
+          "http://192.168.0.114:8000/api/auth/user",
           /** this api contains the customer order detail which are identified by access token */
           headers: headers,
           );
       data = json.decode(response.body);
 
       setState(() {
-      data;
+      data = data;
       });
       print(data);
       return data;
@@ -171,7 +171,7 @@ class MyProfileState extends State<MyProfile> {
                                 ListTile(
                                   leading: Icon(Icons.supervised_user_circle),
                                   title: Text(
-                                      "Role: " + data['role'].toString()),
+                                      "Role: " + data['role']['name'].toString()),
                                 ),
                               ]),
                             ),

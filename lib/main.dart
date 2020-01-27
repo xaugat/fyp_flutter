@@ -50,6 +50,20 @@ class LoginPageState extends State<LoginPage> {
 
   bool _isLoading = false;
 
+  ScaffoldState scaffoldState;
+
+  _showMsg(msg){
+    final snackBar = SnackBar(
+      content: Text(msg),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: (){},
+
+      ),
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -180,7 +194,7 @@ class LoginPageState extends State<LoginPage> {
     };
     var jsonData = null;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var response = await http.post("http://100.64.202.138:8000/api/auth/login", body: data);
+    var response = await http.post("http://192.168.0.114:8000/api/auth/login", body: data);
     if(response.statusCode ==200){
       jsonData = json.decode(response.body);
       
@@ -201,6 +215,7 @@ class LoginPageState extends State<LoginPage> {
       });
     }
     else{
+      _showMsg(response.body);
       print(response.body);
     }
   }
