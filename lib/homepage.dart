@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final String url = 'http://192.168.0.114:8000/api/events';
+  final String url = 'http://192.168.0.109:8000/api/events';
   List data;
   String accessToken;
   _HomePageState(this.accessToken);
@@ -142,11 +142,19 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Card(
                       child: Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
+                        padding: EdgeInsets.only(left: 2, right: 6),
                         child: ListTile(
-                          title: Text(data[index]['event_name']),
+                          leading: Icon(Icons.event_available,size: 50,color: Colors.blue[900],),
+                          title: Text(data[index]['event_name'],style: TextStyle(fontWeight: FontWeight.bold),),
                           subtitle: Text(data[index]['event_date']),
-                          trailing: Text(data[index]['event_venue']),
+                          trailing: Column(
+                            children: <Widget>[
+                              
+                              Icon(Icons.location_on,color: Colors.red,),
+                              Text(data[index]['event_venue']),
+                              
+                            ],
+                          ),
                            
 
                         ),

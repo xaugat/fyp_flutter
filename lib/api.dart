@@ -4,7 +4,7 @@ import 'package:http/http.dart'as http;
 
 class CallApi{
 
-  final String _url = 'http://192.168.0.114:8000/api/auth/';
+  final String _url = 'http://192.168.0.109:8000/api/auth/';
 
   postData(data, apiUrl) async{
     var fullUrl = _url + apiUrl;

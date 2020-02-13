@@ -11,6 +11,8 @@ import 'package:alumniapp/homepage.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
+import 'api.dart';
+
 void main() {
   runApp(Main());
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -194,7 +196,7 @@ class LoginPageState extends State<LoginPage> {
     };
     var jsonData = null;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var response = await http.post("http://192.168.0.114:8000/api/auth/login", body: data);
+    var response = await CallApi().postData(data, 'login');
     if(response.statusCode ==200){
       jsonData = json.decode(response.body);
       

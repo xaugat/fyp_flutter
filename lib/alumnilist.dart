@@ -16,7 +16,7 @@ class _AlumniListState extends State<AlumniList> {
   String accessToken;
   _AlumniListState(this.accessToken);
 
-   final String url = 'http://192.168.0.114:8000/api/auth/users';
+   final String url = 'http://192.168.0.109:8000/api/auth/users';
   
   List userData;
   List unfilterData;
@@ -73,34 +73,46 @@ class _AlumniListState extends State<AlumniList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('List of Alumni'),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Icon(Icons.supervised_user_circle),
+        )
+        
+      ],
       ),
       body: 
       Column(
          children: <Widget>[
            Container(
-             margin: EdgeInsets.only(left: 12.0,right: 12.0, bottom: 8.0, top: 8.0),
+             margin: EdgeInsets.only(left: 20.0,right: 20.0, bottom: 8.0, top: 8.0),
              decoration: BoxDecoration(
-               color: Colors.white70,
+               color: Colors.white,
                boxShadow: <BoxShadow>[
                  BoxShadow(
-                 offset: Offset(1, 3),
+                 offset: Offset(1, 2,),
                ),
                ],
-               borderRadius: BorderRadius.circular(24.0),
+               borderRadius: BorderRadius.circular(10.0),
 
              ),
              
-             child: TextField(
-               decoration: InputDecoration(
-                 hintText: 'Search alumni....',
-                 contentPadding: EdgeInsets.only(left: 24.0),
-                 border: InputBorder.none,
-               ),
-               onChanged: (String str){
-                 this.searchData(str);
+             child: Padding(
+               padding: const EdgeInsets.only(left: 20),
+               child: TextField(
+                 decoration: InputDecoration(  
+                  icon: Icon(Icons.search,color: Colors.black,), 
+                   hintText: 'Search users....',
+                   contentPadding: EdgeInsets.only(left: 20.0),
+                   
+                   border: InputBorder.none,
+                 ),
+                 onChanged: (String str){
+                   this.searchData(str);
 
-               },
-               
+                 },
+                 
+               ),
              ),
            ),
            
@@ -113,10 +125,16 @@ class _AlumniListState extends State<AlumniList> {
                                 child: Column(
                       children: <Widget>[
                         ListTile(
-                          leading: Icon(Icons.person),
-                          title: Text("${userData[index]["name"]}"),
+                          leading: Icon(Icons.account_circle, size: 50,color: Colors.black
+                          ,),
+                          title: Text("${userData[index]["name"]}", style: TextStyle(fontWeight:FontWeight.bold, fontSize: 18),),
                           subtitle: Text("${userData[index]["email"]}"),
-                          trailing: Text("${userData[index]["role"]["name"]}"),
+                          trailing: Column(
+                            children: <Widget>[
+                              Text("${userData[index]["role"]["name"]}"),
+                              Icon(Icons.verified_user,color: Colors.blueAccent,)
+                            ],
+                          ),
                           onTap: (){
                                Navigator.push(
                               context,
