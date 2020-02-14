@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'package:alumniapp/alumnilist.dart';
 
 class Userprofile extends StatelessWidget {
-
   String getname;
   String getmail;
   String getroleid;
@@ -20,7 +19,6 @@ class Userprofile extends StatelessWidget {
 }
 
 class UserProfile extends StatefulWidget {
-  
   String getname;
   String getmail;
   String getroleid;
@@ -28,23 +26,15 @@ class UserProfile extends StatefulWidget {
   UserProfile(this.getname, this.getmail, this.getroleid);
 
   @override
-  State createState() => new UserProfileState(this.getname, this.getmail, this.getroleid);
+  State createState() =>
+      new UserProfileState(this.getname, this.getmail, this.getroleid);
 }
 
 class UserProfileState extends State<UserProfile> {
-  
-  
   String getname;
   String getmail;
   String getroleid;
   UserProfileState(this.getname, this.getmail, this.getroleid);
-
- 
-
-  
-
-  
- 
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +52,6 @@ class UserProfileState extends State<UserProfile> {
       body: ListView(
         children: <Widget>[
           Container(
-            
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
@@ -88,7 +77,6 @@ class UserProfileState extends State<UserProfile> {
                                 color: Colors.black,
                                 blurRadius: 3.0, // soften the shadow
                                 // spreadRadius: 1.0, //extend the shadow
-                                
                               )
                             ],
                           ),
@@ -98,7 +86,6 @@ class UserProfileState extends State<UserProfile> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CircleAvatar(
-                              
                               backgroundColor: Colors.white,
                               child: Image.asset('images/alumnilogo.png'),
                             ),
@@ -107,42 +94,35 @@ class UserProfileState extends State<UserProfile> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 3,
                     ),
-                    
-                       Container(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 40, right: 40),
-                              child: Column(children: <Widget>[
-                                ListTile(
-                                  leading: Icon(Icons.account_circle),
-                                  title: Text("Name: $getname"),
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.mail),
-                                  title: Text("Email: $getmail"),
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.supervised_user_circle),
-                                  title: Text(
-                                      "Role: $getroleid" ),
-                                ),
-                              ]),
-                            ),
-                  
-                          ),
-                  
-                
-                        
-                      
-                    
+                    Container(
+                      child: ListTile(
+                        title: Center(
+                            child: Text(
+                          "$getname",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        )),
+                      ),
+                    ),
+                    Container(
+                        child: Center(
+                      child: Column(children: <Widget>[
+                        ListTile(
+                          leading: Icon(Icons.supervised_user_circle),
+                          title: Text("$getroleid"),
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.mail),
+                          title: Text("$getmail"),
+                        ),
+                      ]),
+                    )),
                     SizedBox(
                       height: 10,
                     ),
-             
                     Text('All Achievements of $getname'),
-                  
                   ],
                 ),
               ),

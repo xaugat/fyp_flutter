@@ -16,7 +16,7 @@ class _AlumniListState extends State<AlumniList> {
   String accessToken;
   _AlumniListState(this.accessToken);
 
-   final String url = 'http://192.168.0.109:8000/api/auth/users';
+   final String url = 'http://192.168.0.114:8000/api/auth/users';
   
   List userData;
   List unfilterData;
@@ -93,7 +93,7 @@ class _AlumniListState extends State<AlumniList> {
                  offset: Offset(1, 2,),
                ),
                ],
-               borderRadius: BorderRadius.circular(10.0),
+               borderRadius: BorderRadius.circular(0.0),
 
              ),
              

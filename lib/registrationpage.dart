@@ -23,6 +23,8 @@ class RegistrationpageState extends State<Registrationpage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfController = TextEditingController();
   TextEditingController roleController = TextEditingController();
+  TextEditingController achievementController = TextEditingController();
+  TextEditingController jobController = TextEditingController();
 
   bool _isLoading = false;
 
@@ -139,6 +141,7 @@ class RegistrationpageState extends State<Registrationpage> {
                             return null;
                           }
                         },
+                        controller: phoneController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -265,7 +268,7 @@ class RegistrationpageState extends State<Registrationpage> {
                             return null;
                           }
                         },
-                        controller: roleController,
+                        controller: achievementController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -288,6 +291,7 @@ class RegistrationpageState extends State<Registrationpage> {
                             return null;
                           }
                         },
+                        controller: addressController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -309,6 +313,7 @@ class RegistrationpageState extends State<Registrationpage> {
                             return null;
                           }
                         },
+                        controller: jobController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -367,6 +372,10 @@ class RegistrationpageState extends State<Registrationpage> {
       'password': passwordController.text,
       'password_confirmation': passwordConfController.text,
       'roles_id': roleController.text,
+      'phone' : phoneController.text,
+      'address' : addressController.text,
+      'Achievements' : achievementController.text,
+      'Job' : jobController.text,
     };
 
     print(data);

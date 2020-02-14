@@ -59,7 +59,7 @@ class MyProfileState extends State<MyProfile> {
       //     String bod = '{"api_token":"'+ accessToken+'"}';
       //  print("bodyR is $bod");
       http.Response response = await http.get(
-          "http://192.168.0.109:8000/api/auth/user",
+          "http://192.168.0.114:8000/api/auth/user",
           /** this api contains the customer order detail which are identified by access token */
           headers: headers,
           );
