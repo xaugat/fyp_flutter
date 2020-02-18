@@ -57,9 +57,18 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.blue[900],
           title: Text('Events'),
           actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                icon: Icon(Icons.add),
+                iconSize: 25,
+                onPressed: (){
+
+                },),
+            ),
               
            Icon(Icons.notifications_active),
-           SizedBox(width: 30,)
+           SizedBox(width: 20,)
             
           ]
         ),
