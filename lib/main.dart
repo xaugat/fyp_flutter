@@ -147,10 +147,7 @@ class LoginPageState extends State<LoginPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Registrationpage()),
-                  );
+                 
                 },
                 child: Text(
                   "Forgot Password?",
@@ -173,9 +170,13 @@ class LoginPageState extends State<LoginPage> {
                           minWidth: 5,
                           height: 5,
                           onPressed: () {
+                             Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Registrationpage()),
+                  );
                             
                           },
-                          child: Text("Contact Us"),
+                          child: Text("Sign Up"),
                         ),
                       ],
                     ),
