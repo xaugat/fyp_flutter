@@ -56,15 +56,13 @@ class MyProfileState extends State<MyProfile> {
         "Authorization": "Bearer $accessToken"
       }; /** sending access token to api */
       print("header is $headers");
- 
+
       http.Response response = await http.get(
-          "http://192.168.0.107:8000/api/auth/user",
-        
-          headers: headers,
-          );
+        "http://192.168.0.107:8000/api/auth/user",
+        headers: headers,
+      );
       data = json.decode(response.body);
 
-      
       print(data);
       return data;
     } catch (e) {
@@ -75,8 +73,7 @@ class MyProfileState extends State<MyProfile> {
   @override
   void initState() {
     super.initState();
-        getData();
-       
+    getData();
   }
 
   @override
@@ -87,7 +84,7 @@ class MyProfileState extends State<MyProfile> {
         title: const Text("Profile page"),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.edit),
             onPressed: () {},
           ),
         ],
@@ -95,7 +92,6 @@ class MyProfileState extends State<MyProfile> {
       body: ListView(
         children: <Widget>[
           Container(
-            
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
@@ -121,7 +117,6 @@ class MyProfileState extends State<MyProfile> {
                                 color: Colors.black,
                                 blurRadius: 3.0, // soften the shadow
                                 // spreadRadius: 1.0, //extend the shadow
-                                
                               )
                             ],
                           ),
@@ -131,7 +126,6 @@ class MyProfileState extends State<MyProfile> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CircleAvatar(
-                              
                               backgroundColor: Colors.white,
                               child: Image.asset('images/alumnilogo.png'),
                             ),
@@ -153,55 +147,61 @@ class MyProfileState extends State<MyProfile> {
                           ));
                         } else {
                           return Container(
-                            
-                              
-                              child: Column(children: <Widget>[
-                                Container(
-                                  child: ListTile(
-                                    
-                                    title: Center(child: Text(data['name'], style: TextStyle(fontWeight:FontWeight.bold),)),
-                                  ),
+                            child: Column(children: <Widget>[
+                              Container(
+                                child: ListTile(
+                                  title: Center(
+                                      child: Text(
+                                    data['name'],
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold,fontSize: 22),
+                                  )),
                                 ),
-                                ListTile(
-                                  leading: Icon(Icons.mail),
-                                  title: Text(data['email']),
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.supervised_user_circle),
-                                  title: Text(
-                                       data['role']['name'].toString()),
-                                ),
-                                 ListTile(
-                                  leading: Icon(Icons.location_on),
-                                  title: Text(
-                                      data['Address']),
-                                ),
-                                 ListTile(
-                                  leading: Icon(Icons.work),
-                                  title: Text(
-                                       data['Job']),
-                                ),
-                                SizedBox(
-                      height: 40,
-                    ),
-                                
-                                 Text('Your All Achievements:'),
-                                ListTile(
-                                  leading: Icon(Icons.line_style),
-                                  title: Text(
-                                       data['Achievements']),
-                                ),
-                              ]),
-                            
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.mail),
+                                title: Text(data['email']),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.supervised_user_circle),
+                                title: Text(data['role']['name'].toString()),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.location_on),
+                                title: Text(data['Address']),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.work),
+                                title: Text(data['Job']),
+                              ),
+                               ListTile(
+                                leading: Icon(Icons.phone),
+                                title: Text(data['Phone']),
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                'Your All Achievements:',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.line_style),
+                                title: Text(data['Achievements']),
+                              ),
+                            ]),
                           );
                         }
                       },
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Container(
-                      width: 300,
+                      width: 330,
                       child: TextField(
                         onChanged: (str) {
                           temp = str;
@@ -209,7 +209,7 @@ class MyProfileState extends State<MyProfile> {
                         maxLength: 50,
                         controller: myController,
                         decoration: InputDecoration(
-                          hintText: 'List of your Achievements...',
+                          hintText: 'Add more Achievements...',
                           prefixIcon: Icon(
                             Icons.local_activity,
                             size: 30,
@@ -225,8 +225,6 @@ class MyProfileState extends State<MyProfile> {
                         ),
                       ),
                     ),
-                   
-                   
                     Container(
                       height: 100,
                       width: 300,
