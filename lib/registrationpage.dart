@@ -122,7 +122,7 @@ class RegistrationpageState extends State<Registrationpage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            labelText: "Email*",
+                            labelText: "Email",
                             hintText: "Please enter your valid email"),
                         // validator: (String value) {
                         //   if (value.trim().isEmpty) {
@@ -142,12 +142,15 @@ class RegistrationpageState extends State<Registrationpage> {
                           }
                         },
                         controller: phoneController,
+                        keyboardType: TextInputType.phone,
+                        maxLength: 10,
+                        maxLengthEnforced: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                           hintText: "Please enter your valid mobile number",
-                          labelText: "Phone*",
+                          labelText: "Phone",
                         ),
                         // validator: (String value) {
                         //   if (value.trim().isEmpty) {
@@ -171,7 +174,8 @@ class RegistrationpageState extends State<Registrationpage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          hintText: "College Symbol No.*",
+                          hintText: "College Symbol No",
+                          
                         ),
                         // validator: (String value) {
                         //   if (value.trim().isEmpty) {
@@ -195,7 +199,7 @@ class RegistrationpageState extends State<Registrationpage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            labelText: "Password*",
+                            labelText: "Password",
                             hintText: "Please create a Password"),
                       ),
                       SizedBox(
@@ -227,6 +231,9 @@ class RegistrationpageState extends State<Registrationpage> {
                       ),
                       TextFormField(
                         controller: roleController,
+                        maxLength: 1,
+                        maxLengthEnforced: true,
+                        keyboardType: TextInputType.phone,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter your role';
@@ -238,7 +245,7 @@ class RegistrationpageState extends State<Registrationpage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          labelText: "role*",
+                          labelText: "role",
                         ),
                       ),
                       SizedBox(
@@ -273,7 +280,7 @@ class RegistrationpageState extends State<Registrationpage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          labelText: "Enter your achievements*",
+                          labelText: "Enter your achievements",
                           hintText: 'Achievement',
                         ),
                       ),
@@ -296,7 +303,7 @@ class RegistrationpageState extends State<Registrationpage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            labelText: "Address*",
+                            labelText: "Address",
                             hintText: "Enter your Recent Address"),
                       ),
                       SizedBox(
@@ -318,7 +325,7 @@ class RegistrationpageState extends State<Registrationpage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            labelText: "Job*",
+                            labelText: "Job",
                             hintText: "Enter your profession"),
                       ),
                       SizedBox(
@@ -345,8 +352,10 @@ class RegistrationpageState extends State<Registrationpage> {
                                 ),
                               ),
                             ),
+                            
                           ),
                         ),
+                        
                       ),
 
                       /*
@@ -356,6 +365,9 @@ class RegistrationpageState extends State<Registrationpage> {
               ),
             ),
           ),
+          SizedBox(
+                        height: 300,
+                      ),
         ],
       ),
     );
