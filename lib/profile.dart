@@ -56,18 +56,15 @@ class MyProfileState extends State<MyProfile> {
         "Authorization": "Bearer $accessToken"
       }; /** sending access token to api */
       print("header is $headers");
-      //     String bod = '{"api_token":"'+ accessToken+'"}';
-      //  print("bodyR is $bod");
+ 
       http.Response response = await http.get(
-          "http://192.168.0.114:8000/api/auth/user",
-          /** this api contains the customer order detail which are identified by access token */
+          "http://192.168.0.107:8000/api/auth/user",
+        
           headers: headers,
           );
       data = json.decode(response.body);
 
-      setState(() {
-      data = data;
-      });
+      
       print(data);
       return data;
     } catch (e) {
@@ -156,25 +153,46 @@ class MyProfileState extends State<MyProfile> {
                           ));
                         } else {
                           return Container(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 40, right: 40),
+                            
+                              
                               child: Column(children: <Widget>[
-                                ListTile(
-                                  leading: Icon(Icons.account_circle),
-                                  title: Text("Name: " + data['name']),
+                                Container(
+                                  child: ListTile(
+                                    
+                                    title: Center(child: Text(data['name'], style: TextStyle(fontWeight:FontWeight.bold),)),
+                                  ),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.mail),
-                                  title: Text("Email: " + data['email']),
+                                  title: Text(data['email']),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.supervised_user_circle),
                                   title: Text(
-                                      "Role: " + data['role']['name'].toString()),
+                                       data['role']['name'].toString()),
+                                ),
+                                 ListTile(
+                                  leading: Icon(Icons.location_on),
+                                  title: Text(
+                                      data['Address']),
+                                ),
+                                 ListTile(
+                                  leading: Icon(Icons.work),
+                                  title: Text(
+                                       data['Job']),
+                                ),
+                                SizedBox(
+                      height: 40,
+                    ),
+                                
+                                 Text('Your All Achievements:'),
+                                ListTile(
+                                  leading: Icon(Icons.line_style),
+                                  title: Text(
+                                       data['Achievements']),
                                 ),
                               ]),
-                            ),
+                            
                           );
                         }
                       },
@@ -191,7 +209,7 @@ class MyProfileState extends State<MyProfile> {
                         maxLength: 50,
                         controller: myController,
                         decoration: InputDecoration(
-                          hintText: 'Add your Achievements...',
+                          hintText: 'List of your Achievements...',
                           prefixIcon: Icon(
                             Icons.local_activity,
                             size: 30,
@@ -207,7 +225,8 @@ class MyProfileState extends State<MyProfile> {
                         ),
                       ),
                     ),
-                    Text('Your All Achievements:'),
+                   
+                   
                     Container(
                       height: 100,
                       width: 300,

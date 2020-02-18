@@ -9,11 +9,16 @@ class Userprofile extends StatelessWidget {
   String getname;
   String getmail;
   String getroleid;
-  Userprofile(this.getname, this.getmail, this.getroleid);
+  String getAddress;
+  String getJob;
+  String getAchievemets;
+  
+
+  Userprofile(this.getname, this.getmail, this.getroleid, this.getAddress,  this.getJob, this.getAchievemets,);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: new UserProfile(this.getname, this.getmail, this.getroleid),
+      home: new UserProfile(this.getname, this.getmail, this.getroleid,this.getAddress, this.getJob, this.getAchievemets,),
     );
   }
 }
@@ -22,19 +27,27 @@ class UserProfile extends StatefulWidget {
   String getname;
   String getmail;
   String getroleid;
+  String getAddress;
+  String getJob;
+  String getAchievemets;
+  
 
-  UserProfile(this.getname, this.getmail, this.getroleid);
+  UserProfile(this.getname, this.getmail, this.getroleid ,this.getAddress, this.getJob, this.getAchievemets,);
 
   @override
   State createState() =>
-      new UserProfileState(this.getname, this.getmail, this.getroleid);
+      new UserProfileState(this.getname, this.getmail, this.getroleid, this.getAddress, this.getJob, this.getAchievemets,);
 }
 
 class UserProfileState extends State<UserProfile> {
   String getname;
   String getmail;
   String getroleid;
-  UserProfileState(this.getname, this.getmail, this.getroleid);
+  String getAddress;
+  String getJob;
+  String getAchievemets;
+  
+  UserProfileState(this.getname, this.getmail, this.getroleid ,this.getAddress, this.getJob, this.getAchievemets,);
 
   @override
   Widget build(BuildContext context) {
@@ -117,12 +130,25 @@ class UserProfileState extends State<UserProfile> {
                           leading: Icon(Icons.mail),
                           title: Text("$getmail"),
                         ),
+                        ListTile(
+                          leading: Icon(Icons.location_on),
+                          title: Text("$getAddress"),
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.work),
+                          title: Text("$getJob"),
+                        ),
+                        
                       ]),
                     )),
                     SizedBox(
-                      height: 10,
+                      height: 80,
                     ),
-                    Text('All Achievements of $getname'),
+                    Center(child: Text('All Achievements of $getname', style: TextStyle(fontWeight:FontWeight.bold),)),
+                    ListTile(
+                          leading: Icon(Icons.view_list),
+                          title: Text("$getAchievemets"),
+                        ),
                   ],
                 ),
               ),

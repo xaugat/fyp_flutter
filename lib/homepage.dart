@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final String url = 'http://192.168.0.114:8000/api/events';
+  final String url = 'http://192.168.0.107:8000/api/events';
   List data;
   String accessToken;
   _HomePageState(this.accessToken);

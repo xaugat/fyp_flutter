@@ -46,7 +46,7 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
-  static var username;
+  
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -208,7 +208,7 @@ class LoginPageState extends State<LoginPage> {
   
         print(accessToken);
         
-        username = jsonData['name'];
+        
        
 
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomePage(accessToken)), (Route<dynamic> route) => false );

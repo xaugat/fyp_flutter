@@ -16,7 +16,7 @@ class _AlumniListState extends State<AlumniList> {
   String accessToken;
   _AlumniListState(this.accessToken);
 
-   final String url = 'http://192.168.0.114:8000/api/auth/users';
+   final String url = 'http://192.168.0.107:8000/api/auth/users';
   
   List userData;
   List unfilterData;
@@ -125,21 +125,33 @@ class _AlumniListState extends State<AlumniList> {
                                 child: Column(
                       children: <Widget>[
                         ListTile(
-                          leading: Icon(Icons.account_circle, size: 50,color: Colors.black
+                          leading: Icon(Icons.account_circle, size: 60,color: Colors.black
                           ,),
                           title: Text("${userData[index]["name"]}", style: TextStyle(fontWeight:FontWeight.bold, fontSize: 18),),
-                          subtitle: Text("${userData[index]["email"]}"),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("${userData[index]["email"]}"),
+                              Text("${userData[index]["Job"]}",style: TextStyle(color:Colors.white),),
+                              Text("${userData[index]["Address"]}",style: TextStyle(color:Colors.white),),
+                              Text("${userData[index]["Achievements"]}",style: TextStyle(color:Colors.white),),
+                            ],
+                          ),
                           trailing: Column(
                             children: <Widget>[
                               Text("${userData[index]["role"]["name"]}"),
-                              Icon(Icons.verified_user,color: Colors.blueAccent,)
+                              Icon(Icons.verified_user,color: Colors.blueAccent,),
+                              
+                             
+                              
                             ],
+                            
                           ),
                           onTap: (){
                                Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Userprofile(userData[index]['name'], userData[index]['email'], userData[index]["role"]["name"]
+                                  builder: (context) => Userprofile(userData[index]['name'], userData[index]['email'], userData[index]["role"]["name"], userData[index]['Address'], userData[index]['Job'], userData[index]['Achievements']
                                       )),
                             );
                           },
