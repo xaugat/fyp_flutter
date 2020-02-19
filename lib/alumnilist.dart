@@ -72,7 +72,7 @@ class _AlumniListState extends State<AlumniList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('List of Alumni'),
+      appBar: AppBar(title: Text('List of Users'),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.all(12.0),
@@ -134,6 +134,7 @@ class _AlumniListState extends State<AlumniList> {
                               Text("${userData[index]["email"]}"),
                               Text("${userData[index]["Job"]}",style: TextStyle(color:Colors.white),),
                               Text("${userData[index]["Address"]}",style: TextStyle(color:Colors.white),),
+                              Text("${userData[index]["Phone"]}",style: TextStyle(color:Colors.white),),
                               Text("${userData[index]["Achievements"]}",style: TextStyle(color:Colors.white),),
                             ],
                           ),
@@ -151,7 +152,7 @@ class _AlumniListState extends State<AlumniList> {
                                Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Userprofile(userData[index]['name'], userData[index]['email'], userData[index]["role"]["name"], userData[index]['Address'], userData[index]['Job'], userData[index]['Achievements']
+                                  builder: (context) => Userprofile(userData[index]['name'], userData[index]['email'], userData[index]["role"]["name"], userData[index]['Address'], userData[index]['Phone'], userData[index]['Job'], userData[index]['Achievements']
                                       )),
                             );
                           },

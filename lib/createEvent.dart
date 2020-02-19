@@ -33,6 +33,7 @@ class _EventCreatesState extends State<EventCreates> {
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text('Create a new Event'),
+        
       ),
       body: Container(
           child: Column(children: <Widget>[
@@ -45,9 +46,16 @@ class _EventCreatesState extends State<EventCreates> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 40,
+                  height: 10,
                 ),
                 TextFormField(
+                 validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter Event Name';
+                          } else {
+                            return null;
+                          }
+                        },
                   
                   controller: eventNameController,
                   keyboardType: TextInputType.text,
@@ -61,6 +69,13 @@ class _EventCreatesState extends State<EventCreates> {
                   height: 20,
                 ),
                 TextFormField(
+                  validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter Event Date';
+                          } else {
+                            return null;
+                          }
+                        },
                   controller: eventDateController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -73,6 +88,13 @@ class _EventCreatesState extends State<EventCreates> {
                   height: 20,
                 ),
                 TextFormField(
+                  validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter Event Venue';
+                          } else {
+                            return null;
+                          }
+                        },
                   controller: eventVenueController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -85,6 +107,13 @@ class _EventCreatesState extends State<EventCreates> {
                   height: 20,
                 ),
                  TextFormField(
+                   validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter Event Time';
+                          } else {
+                            return null;
+                          }
+                        },
                   controller: eventTimeController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -102,7 +131,7 @@ class _EventCreatesState extends State<EventCreates> {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
                   child: RaisedButton(
-                    color: Colors.blue,
+                    color: Colors.blue[900],
                     onPressed: () {
                       createEvnt();
                     },

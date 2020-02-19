@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Card(
                       child: Padding(
-                        padding: EdgeInsets.only(left: 2, right: 6),
+                        padding: EdgeInsets.only(left: 2, right: 4),
                         child: ListTile(
                           leading: Icon(Icons.event_available,size: 50,color: Colors.blue[900],),
                           title: Text(data[index]['event_name'],style: TextStyle(fontWeight: FontWeight.bold),),
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                            
                              
                               Text(data[index]['event_date']),
-                              SizedBox(width: 10,),
+                              SizedBox(width: 5,),
                               Text(data[index]['event_time']),
                             ],
                           ),
