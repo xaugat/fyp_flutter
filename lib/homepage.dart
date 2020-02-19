@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:alumniapp/alumnilist.dart';
+import 'package:alumniapp/createEvent.dart';
 import 'package:alumniapp/profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final String url = 'http://192.168.0.107:8000/api/events';
+  final String url = 'http://192.168.0.108:8000/api/events';
   List data;
   String accessToken;
   _HomePageState(this.accessToken);
@@ -63,8 +64,31 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.add),
                 iconSize: 25,
                 onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EventCreate(),
+                    )
+                   );
+                  
 
                 },),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                  icon: Icon(Icons.refresh),
+                  iconSize: 25,
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage(accessToken),
+                      )
+                     );
+                    
+
+                  },),
             ),
               
            Icon(Icons.notifications_active),
@@ -155,7 +179,15 @@ class _HomePageState extends State<HomePage> {
                         child: ListTile(
                           leading: Icon(Icons.event_available,size: 50,color: Colors.blue[900],),
                           title: Text(data[index]['event_name'],style: TextStyle(fontWeight: FontWeight.bold),),
-                          subtitle: Text(data[index]['event_date']),
+                          subtitle: Row(
+                            children: <Widget>[
+                           
+                             
+                              Text(data[index]['event_date']),
+                              SizedBox(width: 10,),
+                              Text(data[index]['event_time']),
+                            ],
+                          ),
                           trailing: Column(
                             children: <Widget>[
                               
