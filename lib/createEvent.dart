@@ -48,6 +48,7 @@ class _EventCreatesState extends State<EventCreates> {
                   height: 40,
                 ),
                 TextFormField(
+                  
                   controller: eventNameController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
