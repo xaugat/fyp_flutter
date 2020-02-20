@@ -124,40 +124,48 @@ class _AlumniListState extends State<AlumniList> {
                   child: Card(
                                 child: Column(
                       children: <Widget>[
-                        ListTile(
-                          leading: Icon(Icons.account_circle, size: 60,color: Colors.black
-                          ,),
-                          title: Text("${userData[index]["name"]}", style: TextStyle(fontWeight:FontWeight.bold, fontSize: 18),),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text("${userData[index]["email"]}"),
-                              Text("${userData[index]["Job"]}",style: TextStyle(color:Colors.white),),
-                              Text("${userData[index]["Address"]}",style: TextStyle(color:Colors.white),),
-                              Text("${userData[index]["Phone"]}",style: TextStyle(color:Colors.white),),
-                              Text("${userData[index]["Achievements"]}",style: TextStyle(color:Colors.white),),
-                            ],
-                          ),
-                          trailing: Column(
-                            children: <Widget>[
-                              Text("${userData[index]["role"]["name"]}"),
-                              Icon(Icons.verified_user,color: Colors.blueAccent,),
-                              
-                             
-                              
-                            ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: ListTile(
                             
-                          ),
-                          onTap: (){
-                               Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Userprofile(userData[index]['name'], userData[index]['email'], userData[index]["role"]["name"], userData[index]['Address'], userData[index]['Phone'], userData[index]['Job'], userData[index]['Achievements']
-                                      )),
-                            );
-                          },
-                          
+                            leading: Icon(Icons.account_circle, size: 50,color: Colors.black
+                            ,),
+                            
+                            title: Text("${userData[index]["name"]}", style: TextStyle(fontWeight:FontWeight.bold, fontSize: 18),),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.only(top:5.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text("${userData[index]["email"]}"),
+                                  Text("${userData[index]["Job"]}",style: TextStyle(color:Colors.white,fontSize: 2),),
+                                  Text("${userData[index]["Address"]}",style: TextStyle(color:Colors.white, fontSize: 2),),
+                                  Text("${userData[index]["Phone"]}",style: TextStyle(color:Colors.white, fontSize: 2),),
+                                  Text("${userData[index]["Achievements"]}",style: TextStyle(color:Colors.white, fontSize: 2),),
+                                ],
+                              ),
+                            ),
+                            trailing: Column(
+                              children: <Widget>[
+                                Text("${userData[index]["role"]["name"]}"),
+                                Icon(Icons.verified_user,color: Colors.blueAccent,),
+                                
+                               
+                                
+                              ],
+                              
+                            ),
+                            onTap: (){
+                                 Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Userprofile(userData[index]['name'], userData[index]['email'], userData[index]["role"]["name"], userData[index]['Address'], userData[index]['Phone'], userData[index]['Job'], userData[index]['Achievements']
+                                        )),
+                              );
+                            },
+                            
 
+                          ),
                         )
                       ],
                       
