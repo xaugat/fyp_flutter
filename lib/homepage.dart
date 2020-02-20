@@ -28,7 +28,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final String url = 'http://192.168.0.108:8000/api/events';
+  TextEditingController adminController = TextEditingController();
+  final String url = 'http://192.168.0.111:8000/api/events';
   List data;
   String accessToken;
   _HomePageState(this.accessToken);
@@ -55,113 +56,125 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue[900],
-          title: Text('Events'),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                icon: Icon(Icons.add),
-                iconSize: 25,
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
+            backgroundColor: Colors.blue[900],
+            title: Text('Events'),
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: Icon(Icons.add),
+                  iconSize: 25,
+                  onPressed: () {
+                    showDialog(context: context,
+                    builder: (BuildContext context){
+                        return AlertDialog(
+                      title: Text('Only Admin and College can Create Events'),
+                      
+                      content: Row(
+                        children: <Widget>[
+                          Expanded(child: TextField(autofocus: true,
+                          controller: adminController,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            hintText: 'Enter Admin password to continue'
+                            
+                          ),))
+                        ],
+                        
+                      ),
+                      actions: <Widget>[
+                        FlatButton(onPressed: (){
+                          if (adminController.text == 'ing@admin'){
+                            Navigator.push(
+                        context,
+                        MaterialPageRoute(
                           builder: (context) => EventCreate(),
-                    )
-                   );
-                  
+                        ));
 
-                },),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
+                          }else{
+                          print('incorrect password');
+                          }
+                        }, child: Text('Ok'))
+                      ],
+
+                    );
+
+                    });
+                  
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => EventCreate(),
+                    //     ));
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
                   icon: Icon(Icons.refresh),
                   iconSize: 25,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => HomePage(accessToken),
-                      )
-                     );
-                    
-
-                  },),
-            ),
-              
-           Icon(Icons.notifications_active),
-           SizedBox(width: 20,)
-            
-          ]
-        ),
+                          builder: (context) => HomePage(accessToken),
+                        ));
+                  },
+                ),
+              ),
+              Icon(Icons.notifications_active),
+              SizedBox(
+                width: 20,
+              )
+            ]),
         drawer: Drawer(
           child: ListView(children: <Widget>[
-            
             UserAccountsDrawerHeader(
-              
-              
               accountName: Text("Hello!"),
               accountEmail: Text('Welcome to the Application'),
-             
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage('images/cover.jpg'),)
-              ),
+                  image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage('images/cover.jpg'),
+              )),
             ),
             ListTile(
-              title: Text('View Profile'),
-              leading: Icon(Icons.account_circle),
-              onTap: (){
-                Navigator.push(
+                title: Text('View Profile'),
+                leading: Icon(Icons.account_circle),
+                onTap: () {
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MyProfile(accessToken),
-                    )
-                   );
-
-              }
-
-            ),
-
-            
-                
-
+                        builder: (context) => MyProfile(accessToken),
+                      ));
+                }),
             ListTile(
               title: Text('Search Alumni'),
               leading: Icon(Icons.search),
-              onTap: (){
-                 Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AlumniList(accessToken),
-                    )
-                   );
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AlumniList(accessToken),
+                    ));
               },
-
             ),
-             ListTile(
+            ListTile(
               title: Text('Visit College'),
               leading: Icon(Icons.school),
-
             ),
-           
-             ListTile(
+            ListTile(
               title: Text('Report Us'),
               leading: Icon(Icons.report),
-
             ),
-             ListTile(
+            ListTile(
               title: Text('Rate us'),
               leading: Icon(Icons.rate_review),
-
             ),
-             ListTile(
+            ListTile(
               title: Text('Logout'),
               leading: Icon(Icons.exit_to_app),
-
             ),
           ]),
         ),
@@ -177,27 +190,33 @@ class _HomePageState extends State<HomePage> {
                       child: Padding(
                         padding: EdgeInsets.only(left: 2, right: 4),
                         child: ListTile(
-                          leading: Icon(Icons.event_available,size: 50,color: Colors.blue[900],),
-                          title: Text(data[index]['event_name'],style: TextStyle(fontWeight: FontWeight.bold),),
+                          leading: Icon(
+                            Icons.event_available,
+                            size: 50,
+                            color: Colors.blue[900],
+                          ),
+                          title: Text(
+                            data[index]['event_name'],
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           subtitle: Row(
                             children: <Widget>[
-                           
-                             
                               Text(data[index]['event_date']),
-                              SizedBox(width: 5,),
+                              SizedBox(
+                                width: 5,
+                              ),
                               Text(data[index]['event_time']),
                             ],
                           ),
                           trailing: Column(
                             children: <Widget>[
-                              
-                              Icon(Icons.location_on,color: Colors.red,),
+                              Icon(
+                                Icons.location_on,
+                                color: Colors.red,
+                              ),
                               Text(data[index]['event_venue']),
-                              
                             ],
                           ),
-                           
-
                         ),
                       ),
                     ),

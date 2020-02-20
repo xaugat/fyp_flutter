@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:alumniapp/post.dart';
 import 'package:alumniapp/profile.dart';
 import 'package:alumniapp/registrationpage.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,10 +23,10 @@ void main() {
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("hello");
+    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Chart',
+      title: 'Alumni App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
