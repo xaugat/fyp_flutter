@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:alumniapp/alumnilist.dart';
 import 'package:alumniapp/createEvent.dart';
+import 'package:alumniapp/eventdetail.dart';
 import 'package:alumniapp/profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -178,53 +179,73 @@ class _HomePageState extends State<HomePage> {
             ),
           ]),
         ),
-        body: ListView.builder(
-          itemCount: data == null ? 0 : data.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              child: new Center(
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Card(
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 2, right: 4),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.event_available,
-                            size: 50,
-                            color: Colors.blue[900],
-                          ),
-                          title: Text(
-                            data[index]['event_name'],
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Row(
-                            children: <Widget>[
-                              Text(data[index]['event_date']),
-                              SizedBox(
-                                width: 5,
+       
+            
+            body: ListView.builder(
+              itemCount: data == null ? 0 : data.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  child: new Center(
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Card(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 2, right: 4),
+                            child: ListTile(
+                              onTap: (){
+                                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Eventdetail(
+                        data[index]['event_name'],
+                        data[index]['event_date'],
+                        data[index]['event_time'],
+                        data[index]['event_venue'],
+
+                      ),
+                    ));
+
+                              },
+                              leading: Icon(
+                                Icons.event_available,
+                                size: 50,
+                                color: Colors.blue[900],
                               ),
-                              Text(data[index]['event_time']),
-                            ],
-                          ),
-                          trailing: Column(
-                            children: <Widget>[
-                              Icon(
-                                Icons.location_on,
-                                color: Colors.red,
+                              title: Text(
+                                data[index]['event_name'],
+                                style: TextStyle(fontWeight: FontWeight.bold,color:Colors.black,fontSize: 18,),
                               ),
-                              Text(data[index]['event_venue']),
-                            ],
+                              subtitle: Row(
+                                children: <Widget>[
+                                  Text(data[index]['event_venue'],style: TextStyle(color: Colors.white, fontSize: 1),),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(data[index]['event_time'], style: TextStyle(color: Colors.white, fontSize: 1),),
+                                ],
+                              ),
+                              trailing: Column(
+                                children: <Widget>[
+                                  
+                                  Icon(Icons.date_range,color: Colors.black,),
+                                  SizedBox(height:5),
+                                  Text(data[index]['event_date']),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ));
+                  ),
+                );
+              },
+            ),
+          
+      );
+        
   }
+
+  
 }

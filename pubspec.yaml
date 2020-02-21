@@ -54,6 +54,15 @@ flutter:
     - images/alumnilogo.png
     - images/cover.png
     - images/cover.jpg
+    - images/christmas.jpg
+    - images/carnival.jpg
+    - images/aspire.jpg
+    - images/graduation.jpg
+    - images/lhosar.png
+    - images/britan.jpg
+    - images/holi.jpg
+    - images/sports.jpg
+    - images/teej.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
