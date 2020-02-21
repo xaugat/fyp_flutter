@@ -68,14 +68,14 @@ class EventDetail_State extends State<Eventdetails> {
              ),
              SizedBox(height:20),
              Text('Details of $name',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 15,color: Colors.red[900]),),
-             SizedBox(height:20),
+             SizedBox(height:10),
              Padding(
                padding: const EdgeInsets.all(8.0),
                child: Container(
                  decoration: BoxDecoration(
                    borderRadius: BorderRadius.circular(20),
                    border: Border.all(),
-                   color: Colors.grey
+                   color: Colors.blue[900]
                  ),
                  
                 
@@ -85,27 +85,27 @@ class EventDetail_State extends State<Eventdetails> {
                      Row(
                        children: <Widget>[
                          SizedBox(width:80),
-                         Icon(Icons.date_range),
+                         Icon(Icons.date_range,color: Colors.white,),
                          SizedBox(width:10),
-                         Text('Event Date: $date'),
+                         Text('Event Date:  $date',style: TextStyle(color:Colors.white),)
                        ],
                      ),
                      SizedBox(height:10),
                      Row(
                        children: <Widget>[
                          SizedBox(width:80),
-                         Icon(Icons.timer),
+                         Icon(Icons.timer,color: Colors.white,),
                          SizedBox(width:10),
-                         Text('Event Time: $time'),
+                         Text('Event Time:  $time',style: TextStyle(color:Colors.white)),
                        ],
                      ),
                      SizedBox(height:10),
                      Row(
                        children: <Widget>[
                          SizedBox(width:80),
-                         Icon(Icons.location_on),
+                         Icon(Icons.location_on,color: Colors.white,),
                          SizedBox(width:10),
-                         Text('Event Venue: $venue'),
+                         Text('Event Venue:  $venue',style: TextStyle(color:Colors.white)),
                        ],
                      ),
                      SizedBox(height:30),
