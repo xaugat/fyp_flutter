@@ -46,6 +46,7 @@ class RegistrationpageState extends State<Registrationpage> {
       value: 2,
     ));
   }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -395,7 +396,22 @@ class RegistrationpageState extends State<Registrationpage> {
     var res = await CallApi().postData(data, 'signup');
 
     var body = jsonDecode(res.body);
+    showDialog(context: context,
+                    builder: (BuildContext context){
+    return AlertDialog(
+          title: Text('Message'),
+          content: Text(res.body),
+          actions: <Widget>[
+            FlatButton(onPressed: (){
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+            }, child: Text('ok'))
+          ],
+        );
+                    },
+    );
     print(body);
+    
 
     setState(() {
       _isLoading = false;
