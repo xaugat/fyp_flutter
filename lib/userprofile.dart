@@ -20,6 +20,7 @@ class Userprofile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: new UserProfile(this.getname, this.getmail, this.getroleid,this.getAddress, this.getPhone, this.getJob, this.getAchievemets,),
     );
   }
