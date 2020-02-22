@@ -72,7 +72,10 @@ class _AlumniListState extends State<AlumniList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('List of Users'),
+      backgroundColor: Colors.blue[900],
+      appBar: AppBar(
+        backgroundColor: Colors.blue[900],
+        title: Text('List of Users'),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.all(12.0),

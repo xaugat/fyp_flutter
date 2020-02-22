@@ -63,6 +63,7 @@ class UserProfileState extends State<UserProfile> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        backgroundColor: Colors.blue[900],
         title: Text(getname),
         actions: <Widget>[
           IconButton(

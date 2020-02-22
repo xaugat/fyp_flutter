@@ -81,6 +81,7 @@ class MyProfileState extends State<MyProfile> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        backgroundColor: Colors.blue[900],
         title: const Text("Profile page"),
         actions: <Widget>[
           IconButton(

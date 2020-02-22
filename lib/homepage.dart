@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[900],
         appBar: AppBar(
             backgroundColor: Colors.blue[900],
             title: Text('Events'),

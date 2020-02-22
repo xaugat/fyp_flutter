@@ -30,6 +30,7 @@ dependencies:
   url:
   shared_preferences:
   url_launcher:
+  carousel_slider: ^1.3.0
   
  
 
@@ -63,6 +64,14 @@ flutter:
     - images/holi.jpg
     - images/sports.jpg
     - images/teej.jpg
+    - images/createevent.jpg
+    - images/eventdetail.jpg
+    - images/Eventlist.jpg
+    - images/menu.jpg
+    - images/myprofile.jpg
+    - images/search.jpg
+    - images/userlist.jpg
+    - images/userprofile.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

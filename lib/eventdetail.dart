@@ -125,7 +125,7 @@ class EventDetail_State extends State<Eventdetails> {
                           margin: EdgeInsets.only(left:80),
                            child: RaisedButton.icon(onPressed: (){
                               
-                           }, icon: Icon(Icons.feedback), label: Text('Interested')),
+                           }, icon: Icon(Icons.favorite), label: Text('Interested')),
 
                          ),
                        ],

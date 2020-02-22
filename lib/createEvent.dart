@@ -32,6 +32,7 @@ class _EventCreatesState extends State<EventCreates> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        backgroundColor: Colors.blue[900],
         title: Text('Create a new Event'),
         
       ),
