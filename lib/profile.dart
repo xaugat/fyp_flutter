@@ -1,3 +1,4 @@
+import 'package:alumniapp/createEvent.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
@@ -33,6 +34,7 @@ class MyProfileState extends State<MyProfile> {
   // UserProfileState();
   String accessToken;
   MyProfileState(this.accessToken);
+  TextEditingController adminController = TextEditingController();
 
   final myController = TextEditingController();
   List<String> item = List();
@@ -58,7 +60,7 @@ class MyProfileState extends State<MyProfile> {
       print("header is $headers");
 
       http.Response response = await http.get(
-        "http://192.168.0.111:8000/api/auth/user",
+        "http://192.168.0.116:8000/api/auth/user",
         headers: headers,
       );
       data = json.decode(response.body);
@@ -78,6 +80,8 @@ class MyProfileState extends State<MyProfile> {
 
   @override
   Widget build(BuildContext context) {
+    var _onPressed;
+
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -149,14 +153,35 @@ class MyProfileState extends State<MyProfile> {
                         } else {
                           return Container(
                             child: Column(children: <Widget>[
-                              Container(
-                                child: ListTile(
-                                  title: Center(
-                                      child: Text(
-                                    data['name'],
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold,fontSize: 22),
-                                  )),
+                              Padding(
+                                padding: const EdgeInsets.only(right:100,left: 100),
+                                child: Container(
+                                  child: ListTile(
+                                    subtitle: Container(
+                                      child: RaisedButton(
+                                        onPressed: () {
+                                          if (data['role']['name'] == 'admin') {
+                                            _onPressed = Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EventCreate(),
+                                                ));
+                                          } else {
+                                            return _onPressed;
+                                          }
+                                        },
+                                        child: Text('Add Events'),
+                                      ),
+                                    ),
+                                    title: Center(
+                                        child: Text(
+                                      data['name'],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22),
+                                    )),
+                                  ),
                                 ),
                               ),
                               ListTile(
@@ -175,7 +200,7 @@ class MyProfileState extends State<MyProfile> {
                                 leading: Icon(Icons.work),
                                 title: Text(data['Job']),
                               ),
-                               ListTile(
+                              ListTile(
                                 leading: Icon(Icons.phone),
                                 title: Text(data['Phone']),
                               ),

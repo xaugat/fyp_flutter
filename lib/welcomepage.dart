@@ -3,6 +3,19 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:alumniapp/main.dart';
 import 'package:alumniapp/loginpage.dart';
 
+class Welcomepage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: WelcomePage(),
+      ),
+      
+    );
+  }
+}
+
 class WelcomePage extends StatefulWidget {
   WelcomePage() : super();
 

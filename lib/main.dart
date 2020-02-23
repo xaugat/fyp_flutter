@@ -25,7 +25,7 @@ class Main extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body: WelcomePage(),
+        body: LoginPage(),
       ),
     );
   }

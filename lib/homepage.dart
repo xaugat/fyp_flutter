@@ -7,6 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:alumniapp/logout.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Homepage extends StatelessWidget {
   String accessToken;
@@ -29,8 +31,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController adminController = TextEditingController();
-  final String url = 'http://192.168.0.111:8000/api/events';
+ 
+  final String url = 'http://192.168.0.116:8000/api/events';
   List data;
   String accessToken;
   _HomePageState(this.accessToken);
@@ -51,6 +53,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     this.getJsonData();
+    
   }
 
   @override
@@ -61,56 +64,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.blue[900],
             title: Text('Events'),
             actions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconButton(
-                  icon: Icon(Icons.add),
-                  iconSize: 25,
-                  onPressed: () {
-                    showDialog(context: context,
-                    builder: (BuildContext context){
-                        return AlertDialog(
-                      title: Text('Only Admin and College can Create Events'),
-                      
-                      content: Row(
-                        children: <Widget>[
-                          Expanded(child: TextField(autofocus: true,
-                          controller: adminController,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            hintText: 'Enter Admin password to continue'
-                            
-                          ),))
-                        ],
-                        
-                      ),
-                      actions: <Widget>[
-                        FlatButton(onPressed: (){
-                          if (adminController.text == 'ing@admin'){
-                            Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventCreate(),
-                        ));
 
-                          }else{
-                          print('incorrect password');
-                          }
-                        }, child: Text('Ok'))
-                      ],
-
-                    );
-
-                    });
-                  
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => EventCreate(),
-                    //     ));
-                  },
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
@@ -165,6 +119,9 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Visit College'),
               leading: Icon(Icons.school),
+              onTap: (){
+                launch ('https://islington.edu.np/');
+              },
             ),
             ListTile(
               title: Text('Report Us'),
@@ -177,6 +134,14 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Logout'),
               leading: Icon(Icons.exit_to_app),
+              onTap: (){
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Logout(accessToken, context),
+                    ));
+
+              },
             ),
           ]),
         ),

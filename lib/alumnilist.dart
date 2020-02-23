@@ -4,6 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+class Alumnilist extends StatelessWidget {
+  @override
+  String accessToken;
+  Alumnilist(this.accessToken);
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: AlumniList(accessToken),
+      ),
+      
+    );
+  }
+}
+
 class AlumniList extends StatefulWidget {
   String accessToken;
   AlumniList(this.accessToken);
@@ -16,7 +30,7 @@ class _AlumniListState extends State<AlumniList> {
   String accessToken;
   _AlumniListState(this.accessToken);
 
-   final String url = 'http://192.168.0.111:8000/api/auth/users';
+   final String url = 'http://192.168.0.116:8000/api/auth/users';
   
   List userData;
   List unfilterData;

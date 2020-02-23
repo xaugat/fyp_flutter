@@ -8,20 +8,6 @@ import 'package:alumniapp/registrationpage.dart';
 
 import 'api.dart';
 
-class Loginpage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: LoginPage(),
-      ),
-
-    );
-      
-    
-  }
-}
-
 class LoginPage extends StatefulWidget {
   @override
   State createState() => new LoginPageState();
@@ -30,7 +16,7 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
-  
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -38,13 +24,12 @@ class LoginPageState extends State<LoginPage> {
 
   ScaffoldState scaffoldState;
 
-  _showMsg(msg){
+  _showMsg(msg) {
     final snackBar = SnackBar(
       content: Text(msg),
       action: SnackBarAction(
         label: 'Close',
-        onPressed: (){},
-
+        onPressed: () {},
       ),
     );
     Scaffold.of(context).showSnackBar(snackBar);
@@ -64,14 +49,12 @@ class LoginPageState extends State<LoginPage> {
   );
 
   Widget build(BuildContext context) {
-    return 
-    Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Login to Your Account'),
         backgroundColor: Colors.blue[900],
       ),
-
-          body: Padding(
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Form(
@@ -95,13 +78,7 @@ class LoginPageState extends State<LoginPage> {
                 TextFormField(
                   controller: passwordController,
                   obscureText: true,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter your Password';
-                    } else {
-                      return null;
-                    }
-                  },
+                  
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock),
                       labelText: "Password",
@@ -117,7 +94,7 @@ class LoginPageState extends State<LoginPage> {
                   child: RaisedButton(
                     color: Colors.blue[900],
                     child: Text(
-                      "Login",
+                      _isLoading ? 'Loging in..' : "Login",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
@@ -127,9 +104,8 @@ class LoginPageState extends State<LoginPage> {
                       setState(() {
                         _isLoading = true;
                       });
+
                       signIn(emailController.text, passwordController.text);
-                      // signIn("sauugat@gmail.com", "saugat121");
-                      
                     },
                   ),
                 ),
@@ -137,9 +113,7 @@ class LoginPageState extends State<LoginPage> {
                   splashColor: Colors.blue[900],
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)),
-                  onPressed: () {
-                   
-                  },
+                  onPressed: () {},
                   child: Text(
                     "Forgot Password?",
                     style: TextStyle(fontSize: 20.0),
@@ -161,11 +135,80 @@ class LoginPageState extends State<LoginPage> {
                             minWidth: 5,
                             height: 5,
                             onPressed: () {
-                               Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Registrationpage()),
-                    );
-                              
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Choose Your role',style: TextStyle(fontWeight:FontWeight.bold),),
+                                      content: Text('Register As'),
+                                      actions: <Widget>[
+                                        Column(
+                                          children: <Widget>[
+                                            Container(
+                                              width: 400,
+                                              child: RaisedButton(
+                                                color: Colors.blue[900],
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Registrationpage(0)),
+                                                  );
+                                                },
+                                                child: Text('Admin'),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 400,
+                                              child: RaisedButton(
+                                                color: Colors.blue[900],
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Registrationpage(1)),
+                                                  );
+                                                },
+                                                child: Text('College'),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 400,
+                                              child: RaisedButton(
+                                                color: Colors.blue[900],
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Registrationpage(2)),
+                                                  );
+                                                },
+                                                child: Text('Alumni'),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 400,
+                                              child: RaisedButton(
+                                                color: Colors.blue[900],
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Registrationpage(3)),
+                                                  );
+                                                },
+                                                child: Text('Student'),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  });
                             },
                             child: Text("Sign Up"),
                           ),
@@ -182,35 +225,32 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  void signIn(String email, password) async{
-    Map data = {
-      'email' : email,
-      'password' : password
-    };
+  void signIn(String email, password) async {
+    setState(() {
+      _isLoading = true;
+    });
+    Map data = {'email': email, 'password': password};
     var jsonData = null;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var response = await CallApi().postData(data, 'login');
-    if(response.statusCode ==200){
+    if (response.statusCode == 200) {
       jsonData = json.decode(response.body);
-      
 
       setState(() {
-        
         sharedPreferences.setString("token", jsonData['access_token']);
         var accessToken = jsonData['access_token'];
 
-  
         print(accessToken);
-        
-        
-       
 
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomePage(accessToken)), (Route<dynamic> route) => false );
-
-        
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+                builder: (BuildContext context) => HomePage(accessToken)),
+            (Route<dynamic> route) => false);
       });
-    }
-    else{
+      setState(() {
+        _isLoading = false;
+      });
+    } else {
       _showMsg(response.body);
       print(response.body);
     }

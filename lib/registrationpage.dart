@@ -8,13 +8,19 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class Registrationpage extends StatefulWidget {
+  int getrole;
+  Registrationpage(this.getrole);
+
   @override
   State<StatefulWidget> createState() {
-    return RegistrationpageState();
+    return RegistrationpageState(this.getrole);
   }
 }
 
 class RegistrationpageState extends State<Registrationpage> {
+  int getrole;
+  RegistrationpageState(this.getrole);
+
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -22,7 +28,7 @@ class RegistrationpageState extends State<Registrationpage> {
   TextEditingController addressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfController = TextEditingController();
-  TextEditingController roleController = TextEditingController();
+  
   TextEditingController achievementController = TextEditingController();
   TextEditingController jobController = TextEditingController();
 
@@ -86,13 +92,7 @@ class RegistrationpageState extends State<Registrationpage> {
                       ),
                       TextFormField(
                         controller: nameController,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your Full name';
-                          } else {
-                            return null;
-                          }
-                        },
+                        
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -112,13 +112,7 @@ class RegistrationpageState extends State<Registrationpage> {
                       TextFormField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your valid email';
-                          } else {
-                            return null;
-                          }
-                        },
+                        
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -135,13 +129,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         height: 10,
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your phone number';
-                          } else {
-                            return null;
-                          }
-                        },
+                       
                         controller: phoneController,
                         keyboardType: TextInputType.phone,
                         maxLength: 10,
@@ -163,13 +151,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         height: 10,
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your phone Symbol number';
-                          } else {
-                            return null;
-                          }
-                        },
+                        
                         decoration: InputDecoration(
                           
                           border: OutlineInputBorder(
@@ -188,13 +170,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         height: 10,
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter a new password';
-                          } else {
-                            return null;
-                          }
-                        },
+                     
                         controller: passwordController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -207,13 +183,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         height: 10,
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter same password';
-                          } else {
-                            return null;
-                          }
-                        },
+                        
                         controller: passwordConfController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -227,28 +197,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         //   }
                         // },
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: roleController,
-                        maxLength: 1,
-                        maxLengthEnforced: true,
-                        keyboardType: TextInputType.phone,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your role';
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          labelText: "role",
-                        ),
-                      ),
+                     
                       SizedBox(
                         height: 10,
                       ),
@@ -269,13 +218,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         height: 10,
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your achievements';
-                          } else {
-                            return null;
-                          }
-                        },
+                        
                         controller: achievementController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -292,13 +235,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         height: 10,
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your address';
-                          } else {
-                            return null;
-                          }
-                        },
+                       
                         controller: addressController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -314,13 +251,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         height: 10,
                       ),
                       TextFormField(
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your profession';
-                          } else {
-                            return null;
-                          }
-                        },
+                      
                         controller: jobController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -384,7 +315,7 @@ class RegistrationpageState extends State<Registrationpage> {
       'email': emailController.text,
       'password': passwordController.text,
       'password_confirmation': passwordConfController.text,
-      'roles_id': roleController.text,
+      'roles_id': getrole,
       'phone' : phoneController.text,
       'address' : addressController.text,
       'Achievements' : achievementController.text,
@@ -402,10 +333,20 @@ class RegistrationpageState extends State<Registrationpage> {
           title: Text('Message'),
           content: Text(res.body),
           actions: <Widget>[
+            Row(
+              children: <Widget>[
+                FlatButton(onPressed: (){
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+            }, child: Text('Back to login')),
             FlatButton(onPressed: (){
                   Navigator.pop(context);
-                  Navigator.pop(context);
             }, child: Text('ok'))
+                
+              ],
+            )
+            
           ],
         );
                     },
