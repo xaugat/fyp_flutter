@@ -17,6 +17,8 @@ class CallApi{
     );
   }
 
+ 
+
     post(data, apiUrl) async{
     var fullUrl = _uri + apiUrl;
     return http.post(
@@ -39,9 +41,11 @@ class CallApi{
   _setHeaders() => {
         'Content-Type': 'application/json',
     'Accept': 'application/json',
- 
-
-
   };
 
+  
+
+ 
+
 }
+

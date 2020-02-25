@@ -1,4 +1,5 @@
 import 'package:alumniapp/createEvent.dart';
+import 'package:alumniapp/updateuser.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
@@ -90,7 +91,13 @@ class MyProfileState extends State<MyProfile> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Updateuser(accessToken, data['id'], data['Achievements'], data['Address']),
+                  ));
+            },
           ),
         ],
       ),
@@ -154,7 +161,8 @@ class MyProfileState extends State<MyProfile> {
                           return Container(
                             child: Column(children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.only(right:100,left: 100),
+                                padding: const EdgeInsets.only(
+                                    right: 100, left: 100),
                                 child: Container(
                                   child: ListTile(
                                     subtitle: Container(
