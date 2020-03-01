@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:alumniapp/notificationPage.dart';
+import 'package:alumniapp/notificationPage.dart';
 import 'package:http/http.dart';
 import 'package:flutter/material.dart';
 
@@ -135,48 +137,55 @@ class _EventCreatesState extends State<EventCreates> {
                     color: Colors.blue[900],
                     onPressed: () {
                       createEvnt();
-                    },
-                    textColor: Colors.white,
-                    child: Text(_isLoading ? 'Creating event..' : "Create",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ))
-      ])),
-    );
-  }
+                      
+                                          },
+                                          textColor: Colors.white,
+                                          child: Text(_isLoading ? 'Creating event..' : "Create",
+                                                      style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.white,),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ))
+                            ])),
+                          );
+                        }
+                      
+                        void createEvnt() async{
+                          setState(() {
+                            _isLoading = true;
+                          });
+                      
+                          var data = {
+                            'event_name': eventNameController.text,
+                            'event_date': eventDateController.text,
+                            'event_venue': eventVenueController.text,
+                            'event_time' : eventTimeController.text,
+                            
+                          };
+                      
+                          print(data);
+                      
+                          var res = await CallApi().post(data, 'event');
+                      
+                          var body = jsonDecode(res.body);
+                          print(body);
+                            setState(() {
+                            _isLoading = false;
+                          });
 
-  void createEvnt() async{
-    setState(() {
-      _isLoading = true;
-    });
-
-    var data = {
-      'event_name': eventNameController.text,
-      'event_date': eventDateController.text,
-      'event_venue': eventVenueController.text,
-      'event_time' : eventTimeController.text,
-      
-    };
-
-    print(data);
-
-    var res = await CallApi().post(data, 'event');
-
-    var body = jsonDecode(res.body);
-    print(body);
-      setState(() {
-      _isLoading = false;
-    });
-  
-
-  
-  
-  }
-}
+                          NotificationPage();
+                          
+                          
+                        
+                      
+                        
+                        
+                        }
+                      }
+                      
+                      

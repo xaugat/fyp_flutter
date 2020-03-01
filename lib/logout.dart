@@ -44,7 +44,7 @@ class LogoutState extends State<Logout> {
  */
 Future fetchLogoutApi(getAccessToken, context) async {
   try {
-    String logOutUrl = "http://192.168.0.116:8000/api/auth/logout";
+    String logOutUrl = "http://192.168.0.114:8000/api/auth/logout";
     Map<String, String> headers = {"Authorization": "Bearer $getAccessToken"};
     http.Response response = await http.get(logOutUrl, headers: headers);
     if (response.statusCode == 200) {

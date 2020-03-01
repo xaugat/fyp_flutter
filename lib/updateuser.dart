@@ -6,27 +6,39 @@ import 'dart:async';
 
 class Updateuser extends StatelessWidget {
   String token;
-  String achievements;
+  
   int getid;
-  String address;
-  Updateuser(this.token, this.getid, this.achievements, this.address);
+  int role;
+  String name;
+  String email;
+    String phone;
+     String address;
+      String job;
+  String achievements;
+  Updateuser(this.token, this.getid,  this.role, this.name, this.email, this.phone, this.address,this.job, this.achievements,);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Updateusers(this.token, this.getid, this.achievements, this.address)),
+      home: Scaffold(body: Updateusers(this.token, this.getid,  this.role, this.name,this.email, this.phone, this.address,this.job, this.achievements,)),
     );
   }
 }
 
 class Updateusers extends StatefulWidget {
   String token;
-  String achievements;
-  String address;
+  
+  int role;
   int getid;
-  Updateusers(this.token, this.getid, this.achievements, this.address);
+  String name;
+  String email;
+    String phone;
+     String address;
+      String job;
+  String achievements;
+  Updateusers(this.token, this.getid,  this.role, this.name, this.email, this.phone, this.address,this.job,this.achievements,);
   @override
-  _UpdateusersState createState() => _UpdateusersState(this.token, this.getid, this.achievements, this.address);
+  _UpdateusersState createState() => _UpdateusersState(this.token, this.getid,  this.role, this.name, this.email, this.phone, this.address,this.job, this.achievements,);
 }
 
 class  _UpdateusersState extends State<Updateusers>{
@@ -41,16 +53,22 @@ class  _UpdateusersState extends State<Updateusers>{
   TextEditingController updateAchievementsController = TextEditingController();
   TextEditingController updateJobController = TextEditingController();
   String token;
-  String achievements;
-  String address;
   int getid;
+  int role;
+  String name;
+   String email;
+    String phone;
+     String address;
+      String job;
+  
+  String achievements;
   
 
   
 
-  _UpdateusersState(this.token, this.getid, this.achievements, this.address);
+  _UpdateusersState(this.token, this.getid,  this.role, this.name, this.email, this.phone, this.address,this.job, this.achievements,);
 
-   final String _url = 'http://192.168.0.116:8000/api/auth/';
+   final String _url = 'http://192.168.0.114:8000/api/auth/';
   
 
     put(data, apiUrl) async{
@@ -82,7 +100,7 @@ class  _UpdateusersState extends State<Updateusers>{
         child: ListView(
           children: <Widget>[
             TextFormField(
-              controller: updateNameController,
+              controller: updateNameController..text = '$name',
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.supervised_user_circle),
@@ -94,7 +112,7 @@ class  _UpdateusersState extends State<Updateusers>{
               height: 10,
             ),
             TextFormField(
-              controller: updateEmailController,
+              controller: updateEmailController..text = '$email',
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email),
@@ -106,11 +124,19 @@ class  _UpdateusersState extends State<Updateusers>{
               height: 10,
             ),
             TextFormField(
+              validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter Event Time';
+                          } else {
+                            return null;
+                          }
+                        },
               controller: updatePasswordController,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock_open),
                   labelText: "Password",
+                  hintText: 'Please Provide your password to update',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0))),
             ),
@@ -118,7 +144,7 @@ class  _UpdateusersState extends State<Updateusers>{
               height: 10,
             ),
             TextFormField(
-              controller: updatePhoneController,
+              controller: updatePhoneController..text = '$phone',
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.phone),
@@ -130,23 +156,11 @@ class  _UpdateusersState extends State<Updateusers>{
               height: 10,
             ),
             TextFormField(
-              controller: updateAddressController,
+              controller: updateAddressController..text = '$address',
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.location_on),
                   labelText: "Address",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0))),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: updateRolesidController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.verified_user),
-                  labelText: "Role",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0))),
             ),
@@ -166,7 +180,7 @@ class  _UpdateusersState extends State<Updateusers>{
               height: 10,
             ),
             TextFormField(
-              controller: updateJobController,
+              controller: updateJobController..text = '$job',
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.work),
@@ -207,7 +221,7 @@ class  _UpdateusersState extends State<Updateusers>{
       'name': updateNameController.text,
       'email': updateEmailController.text,
       'password': updatePasswordController.text,
-      'roles_id' : updateRolesidController.text,
+      'roles_id' : role,
       'phone' : updatePhoneController.text,
       'address' : updateAddressController.text,
       'Achievements' : achievements + updateAchievementsController.text,
@@ -217,7 +231,7 @@ class  _UpdateusersState extends State<Updateusers>{
 
     print(data);
 
-    var res = await _UpdateusersState(this.token, this.getid, this.achievements , this.address).put(data, 'userupdate/$getid');
+    var res = await _UpdateusersState(this.token, this.getid,  this.role,this.name, this.email, this.phone, this.address,this.job, this.achievements,).put(data, 'userupdate/$getid');
 
     var body = jsonDecode(res.body);
     print(body);

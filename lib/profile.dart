@@ -61,7 +61,7 @@ class MyProfileState extends State<MyProfile> {
       print("header is $headers");
 
       http.Response response = await http.get(
-        "http://192.168.0.116:8000/api/auth/user",
+        "http://192.168.0.114:8000/api/auth/user",
         headers: headers,
       );
       data = json.decode(response.body);
@@ -81,7 +81,7 @@ class MyProfileState extends State<MyProfile> {
 
   @override
   Widget build(BuildContext context) {
-    var _onPressed;
+    var _onPressed = null;
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -92,11 +92,119 @@ class MyProfileState extends State<MyProfile> {
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Updateuser(accessToken, data['id'], data['Achievements'], data['Address']),
-                  ));
+              if (data['role']['name'] == 'college') {
+                return Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Updateuser(accessToken, data['id'],
+                      1,
+                      data['name'],
+                      data['email'],
+                                            data['Phone'],
+                                            data['Address'],
+                                            data['Job'],
+                          data['Achievements'], ),
+                    ));
+              }
+              else if(data['role']['name'] == 'admin'){
+                return Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Updateuser(accessToken, data['id'],
+                      0,
+                      data['name'],
+                      data['email'],
+                                            data['Phone'],
+                                            data['Address'],
+                                            data['Job'],
+                          data['Achievements'],),
+                    ));
+
+              }
+              else if(data['role']['name'] == 'alumni'){
+                return Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Updateuser(accessToken, data['id'],
+                      2,
+                      data['name'],
+                      data['email'],
+                                            data['Phone'],
+                                            data['Address'],
+                                            data['Job'],
+                          data['Achievements'],),
+                    ));
+
+              }
+               else {
+                return showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(
+                          'Change Your role ?',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        content: Text('Update As'),
+                        actions: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                width: 400,
+                                child: RaisedButton(
+                                  color: Colors.blue[900],
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Updateuser(
+                                            accessToken,
+                                            data['id'],
+                                            2,
+                                            data['name'],
+                                            data['email'],
+                                            data['Phone'],
+                                            data['Address'],
+                                            data['Job'],
+                                            data['Achievements'],
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text('Alumni'),
+                                ),
+                              ),
+                              Container(
+                                width: 400,
+                                child: RaisedButton(
+                                  color: Colors.blue[900],
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Updateuser(
+                                            accessToken,
+                                            data['id'],
+                                            3,
+                                            data['name'],
+                                            data['email'],
+                                            data['Phone'],
+                                            data['Address'],
+                                            data['Job'],
+                                            data['Achievements'],
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text('Do not Update'),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      );
+                    });
+              }
             },
           ),
         ],
@@ -161,127 +269,106 @@ class MyProfileState extends State<MyProfile> {
                           return Container(
                             child: Column(children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 100, left: 100),
+                                padding:
+                                    const EdgeInsets.only(right: 80, left: 80),
                                 child: Container(
                                   child: ListTile(
-                                    subtitle: Container(
-                                      child: RaisedButton(
-                                        onPressed: () {
-                                          if (data['role']['name'] == 'admin') {
-                                            _onPressed = Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      EventCreate(),
-                                                ));
-                                          } else {
-                                            return _onPressed;
-                                          }
-                                        },
-                                        child: Text('Add Events'),
-                                      ),
-                                    ),
-                                    title: Center(
-                                        child: Text(
-                                      data['name'],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22),
-                                    )),
-                                  ),
-                                ),
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.mail),
-                                title: Text(data['email']),
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.supervised_user_circle),
-                                title: Text(data['role']['name'].toString()),
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.location_on),
-                                title: Text(data['Address']),
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.work),
-                                title: Text(data['Job']),
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.phone),
-                                title: Text(data['Phone']),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                'Your All Achievements:',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.line_style),
-                                title: Text(data['Achievements']),
-                              ),
-                            ]),
-                          );
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      width: 330,
-                      child: TextField(
-                        onChanged: (str) {
-                          temp = str;
-                        },
-                        maxLength: 50,
-                        controller: myController,
-                        decoration: InputDecoration(
-                          hintText: 'Add more Achievements...',
-                          prefixIcon: Icon(
-                            Icons.local_activity,
-                            size: 30,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.add),
-                            onPressed: () {
-                              setState(() {
-                                item.add(temp);
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 100,
-                      width: 300,
-                      padding: EdgeInsets.only(
-                        top: 5,
-                      ),
-                      child: Center(
-                        child: Card(
-                          child: ListView(
-                            shrinkWrap: true,
-                            children:
-                                item.map((element) => Text(element)).toList(),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
+                                    subtitle: _event(),
+                                                                       
+                                                                        // subtitle: Container(
+                                                                        //   child: RaisedButton(
+                                                                        //     onPressed: () {
+                                                                        //       if (data['role']['name'] ==
+                                                                        //           'college') {
+                                                                        //         _onPressed = Navigator.push(
+                                                                        //             context,
+                                                                        //             MaterialPageRoute(
+                                                                        //               builder: (context) =>
+                                                                        //                   EventCreate(),
+                                                                        //             ));
+                                                                        //       } else {
+                                                                        //         return _onPressed = null;
+                                                                        //       }
+                                                                        //     },
+                                                                        //     child: Text('Add Events'),
+                                                                        //   ),
+                                                                        // ),
+                                                                        title: Center(
+                                                                            child: Text(
+                                                                          data['name'],
+                                                                          style: TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 22),
+                                                                        )),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  ListTile(
+                                                                    leading: Icon(Icons.mail),
+                                                                    title: Text(data['email']),
+                                                                  ),
+                                                                  ListTile(
+                                                                    leading: Icon(Icons.supervised_user_circle),
+                                                                    title: Text(data['role']['name'].toString()),
+                                                                  ),
+                                                                  ListTile(
+                                                                    leading: Icon(Icons.location_on),
+                                                                    title: Text(data['Address']),
+                                                                  ),
+                                                                  ListTile(
+                                                                    leading: Icon(Icons.work),
+                                                                    title: Text(data['Job']),
+                                                                  ),
+                                                                  ListTile(
+                                                                    leading: Icon(Icons.phone),
+                                                                    title: Text(data['Phone']),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 30,
+                                                                  ),
+                                                                  Text(
+                                                                    'Your All Achievements:',
+                                                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  ListTile(
+                                                                    leading: Icon(Icons.line_style),
+                                                                    title: Text(data['Achievements']),
+                                                                  ),
+                                                                ]),
+                                                              );
+                                                            }
+                                                          },
+                                                        ),
+                                                        SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                  
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                    
+                                      _event() {
+                                         if (data['role']['name'] =='college') {
+                                            return 
+                                            RaisedButton(onPressed:(){
+                                              Navigator.push(context, 
+                                            MaterialPageRoute(builder: (context) =>
+                                             EventCreate(),));
+                                            },
+                                            child: Text('Add Events'), ); 
+                                        } else {
+                                      return null;
+                                       }
+                                        
+                                      }
 }

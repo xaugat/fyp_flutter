@@ -1,9 +1,12 @@
 
 import 'package:alumniapp/loginpage.dart';
+import 'package:alumniapp/notificationPage.dart';
+import 'package:alumniapp/userprofile.dart';
 import 'package:alumniapp/welcomepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 
 void main() {
