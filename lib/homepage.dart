@@ -12,6 +12,8 @@ import 'package:alumniapp/logout.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Homepage extends StatelessWidget {
+
+
   String accessToken;
   Homepage(this.accessToken);
   @override
@@ -32,6 +34,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  TextEditingController searcheventController = TextEditingController();
   CarouselSlider carouselSlider;
   int _current = 0;
   List imgList = [
@@ -47,21 +51,25 @@ class _HomePageState extends State<HomePage> {
   ];
 
   final String url = 'http://192.168.0.114:8000/api/events';
-  List data;
+  List userdata;
+  Map data;
   String accessToken;
   _HomePageState(this.accessToken);
 
   Future<String> getJsonData() async {
     var response = await http
-        .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
+        .get(Uri.encodeFull(url), headers: {"Accept": "application/json", "search" : searcheventController.text});
     print(response.body);
+    var data = jsonDecode(response.body);
 
     setState(() {
-      var convertDataToJson = json.decode(response.body);
-      data = convertDataToJson['data'];
+      userdata = data;
     });
+    print(userdata);
     return "Success";
   }
+
+
 
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
@@ -71,11 +79,11 @@ class _HomePageState extends State<HomePage> {
     return result;
   }
 
-  @override
-  void initState() {
-    super.initState();
-    this.getJsonData();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   this.getJsonData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +195,7 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: <Widget>[
                 TextField(
-                  
+                  controller: searcheventController,
                   decoration: InputDecoration(
                     hintText: 'Search events....',
                     contentPadding: EdgeInsets.only(left: 50.0),
@@ -224,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 
                   carouselSlider = CarouselSlider(
-                    height: 400.0,
+                    height: 350.0,
                     initialPage: 0,
                     enlargeCenterPage: true,
                     autoPlay: true,
@@ -279,29 +287,16 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      OutlineButton(
-                        textColor: Colors.white,
-                        onPressed: goToPrevious,
-                        child: Text("<<"),
-                      ),
-                      OutlineButton(
-                        textColor: Colors.white,
-                        onPressed: goToNext,
-                        child: Text(">>"),
-                      ),
-                      SizedBox(width: 40),
-                    ],
+                  Text('We Celebrate Together!',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                  SizedBox(
+                    height: 10.0,
                   ),
-                  
                 ],
               ),
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: data == null ? 0 : data.length,
+                itemCount: userdata == null ? 0 : userdata.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     child: new Center(
@@ -317,10 +312,10 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => Eventdetail(
-                                          data[index]['event_name'],
-                                          data[index]['event_date'],
-                                          data[index]['event_time'],
-                                          data[index]['event_venue'],
+                                          userdata[index]['event_name'],
+                                          userdata[index]['event_date'],
+                                          userdata[index]['event_time'],
+                                          userdata[index]['event_venue'],
                                         ),
                                       ));
                                 },
@@ -330,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.blue[900],
                                 ),
                                 title: Text(
-                                  data[index]['event_name'],
+                                  userdata[index]['event_name'],
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
@@ -340,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                                 subtitle: Row(
                                   children: <Widget>[
                                     Text(
-                                      data[index]['event_venue'],
+                                      userdata[index]['event_venue'],
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 1),
                                     ),
@@ -348,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 5,
                                     ),
                                     Text(
-                                      data[index]['event_time'],
+                                      userdata[index]['event_time'],
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 1),
                                     ),
@@ -361,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.black,
                                     ),
                                     SizedBox(height: 5),
-                                    Text(data[index]['event_date']),
+                                    Text(userdata[index]['event_date']),
                                   ],
                                 ),
                               ),
@@ -379,15 +374,5 @@ class _HomePageState extends State<HomePage> {
         
       
     );
-  }
-
-  goToPrevious() {
-    carouselSlider.previousPage(
-        duration: Duration(milliseconds: 300), curve: Curves.ease);
-  }
-
-  goToNext() {
-    carouselSlider.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.decelerate);
   }
 }
