@@ -267,7 +267,7 @@ class MyProfileState extends State<MyProfile> {
                         if (snapshot.data == null) {
                           return Container(
                               child: Center(
-                            child: Text("Loading...."),
+                            child: CircularProgressIndicator(),
                           ));
                         } else {
                           return Container(

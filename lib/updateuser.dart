@@ -133,6 +133,7 @@ class  _UpdateusersState extends State<Updateusers>{
                         },
               controller: updatePasswordController,
               keyboardType: TextInputType.text,
+              obscureText: true,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock_open),
                   labelText: "Password",

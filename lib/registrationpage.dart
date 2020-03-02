@@ -170,6 +170,7 @@ class RegistrationpageState extends State<Registrationpage> {
                         height: 10,
                       ),
                       TextFormField(
+                        obscureText: true,
                      
                         controller: passwordController,
                         decoration: InputDecoration(
@@ -185,6 +186,7 @@ class RegistrationpageState extends State<Registrationpage> {
                       TextFormField(
                         
                         controller: passwordConfController,
+                        obscureText: true,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),

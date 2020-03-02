@@ -68,7 +68,7 @@ class LoginPageState extends State<LoginPage> {
                 TextFormField(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  validator: validateEmail,
+                  // validator: validateEmail,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email),
                       labelText: "Email",
@@ -258,17 +258,17 @@ class LoginPageState extends State<LoginPage> {
   }
 }
 
-String validateEmail(String value) {
-  Pattern emailPattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  RegExp emailRegExp = RegExp(emailPattern);
+// String validateEmail(String value) {
+//   Pattern emailPattern =
+//       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+//   RegExp emailRegExp = RegExp(emailPattern);
 
-  if (!emailRegExp.hasMatch(value)) {
-    return 'Please enter your valid Email';
-  } else {
-    return null;
-  }
-}
+//   if (!emailRegExp.hasMatch(value)) {
+//     return 'Please enter your valid Email';
+//   } else {
+//     return null;
+//   }
+// }
 
 /*
  * 

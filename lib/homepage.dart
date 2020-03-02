@@ -35,6 +35,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController searcheventController = TextEditingController();
   CarouselSlider carouselSlider;
+  Timer _debounce;
   int _current = 0;
   List imgList = [
     'images/christmas.jpg',
@@ -192,6 +193,12 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: <Widget>[
                 TextField(
+                   onChanged: (String text){
+                    if (_debounce?.isActive ?? false) _debounce.cancel();
+                    _debounce = Timer(const Duration(milliseconds: 1000),(){
+                      getJsonData();
+                    });
+                  },
                   controller: searcheventController,
                   decoration: InputDecoration(
                     hintText: 'Search events....',

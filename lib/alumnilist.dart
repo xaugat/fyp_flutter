@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alumniapp/profile.dart';
 import 'package:alumniapp/userprofile.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,11 @@ class AlumniList extends StatefulWidget {
 }
 
 class _AlumniListState extends State<AlumniList> {
+
+  
+
   TextEditingController searchController = TextEditingController();
+  Timer _debounce;
   String accessToken;
   _AlumniListState(this.accessToken);
 
@@ -87,6 +93,12 @@ class _AlumniListState extends State<AlumniList> {
             child: Stack(
               children: <Widget>[
                 TextField(
+                  onChanged: (String text){
+                    if (_debounce?.isActive ?? false) _debounce.cancel();
+                    _debounce = Timer(const Duration(milliseconds: 1000),(){
+                      getJsonData();
+                    });
+                  },
                   controller: searchController,
                   decoration: InputDecoration(
                     hintText: 'Search by name....',
