@@ -62,13 +62,14 @@ class UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.blue[900],
         title: Text(getname),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.link),
             onPressed: () {},
           ),
         ],
@@ -84,10 +85,12 @@ class UserProfileState extends State<UserProfile> {
                   children: <Widget>[
                     Stack(
                       children: <Widget>[
-                        Container(
-                          child: Image(
-                            width: 400,
-                            image: AssetImage('images/cover.png'),
+                        Card(
+                                                  child: Container(
+                            child: Image(
+                              width: 400,
+                              image: AssetImage('images/cover.png'),
+                            ),
                           ),
                         ),
 
@@ -181,36 +184,58 @@ class UserProfileState extends State<UserProfile> {
                             )),
                       ),
                     ),
-                    Container(
-                        child: Center(
-                      child: Column(children: <Widget>[
-                        ListTile(
-                          leading: Icon(Icons.supervised_user_circle),
-                          title: Text("$getroleid"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.mail),
-                          title: Text("$getmail"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.location_on),
-                          title: Text("$getAddress"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.work),
-                          title: Text("$getJob"),
-                        ),
-                        
-                      ]),
-                    )),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          child: Center(
+                        child: Column(children: <Widget>[
+                          Card(
+                             
+                                child: ListTile(
+                                leading: Icon(Icons.supervised_user_circle,color: Colors.indigo,),
+                                title: Text('Role'),
+                                subtitle: Text("$getroleid"),
+                            ),
+                              
+                          ),
+                          Card(
+                                                      child: ListTile(
+                              leading: Icon(Icons.mail, color: Colors.blueGrey,),
+                              title: Text('Email'),
+                              subtitle: Text("$getmail"),
+                            ),
+                          ),
+                          Card(
+                                                      child: ListTile(
+                              leading: Icon(Icons.location_on, color: Colors.red,),
+                              title: Text('Address'),
+                              subtitle: Text("$getAddress"),
+                            ),
+                          ),
+                          Card(
+                                                      child: ListTile(
+                              leading: Icon(Icons.work, color: Colors.brown,),
+                              title: Text('Job'),
+                              subtitle: Text("$getJob"),
+                            ),
+                          ),
+                          
+                        ]),
+                      )),
+                    ),
                     SizedBox(
                       height: 80,
                     ),
-                    Center(child: Text('All Achievements of $getname', style: TextStyle(fontWeight:FontWeight.bold),)),
-                    ListTile(
-                          leading: Icon(Icons.view_list),
-                          title: Text("$getAchievemets"),
-                        ),
+                   Text('About $getname', style: TextStyle(fontWeight:FontWeight.bold),),
+                   SizedBox(height:10),
+                    Card(
+                                          child: ListTile(
+                            leading: Icon(Icons.star, color: Colors.indigo,),
+                            title: Text('Achievements'),
+                            
+                            subtitle: Text("$getAchievemets"),
+                          ),
+                    ),
                   ],
                 ),
               ),

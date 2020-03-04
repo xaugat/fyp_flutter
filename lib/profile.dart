@@ -61,7 +61,7 @@ class MyProfileState extends State<MyProfile> {
       print("header is $headers");
 
       http.Response response = await http.get(
-        "http://192.168.0.114:8000/api/auth/user",
+        "http://192.168.0.112:8000/api/auth/user",
         headers: headers,
       );
       data = json.decode(response.body);
@@ -288,26 +288,41 @@ class MyProfileState extends State<MyProfile> {
                                   ),
                                 ),
                               ),
-                              ListTile(
-                                leading: Icon(Icons.mail),
-                                title: Text(data['email']),
+                              Card(
+                                                              child: ListTile(
+                                  leading: Icon(Icons.mail,color: Colors.blueGrey,),
+                                  title: Text('Email'),
+                                  subtitle: Text(data['email']),
+                                ),
                               ),
-                              ListTile(
-                                leading: Icon(Icons.supervised_user_circle),
-                                title: Text(data['role']['name'].toString()),
+                              Card(
+                                                              child: ListTile(
+                                  leading: Icon(Icons.supervised_user_circle, color: Colors.blue[900],),
+                                  title: Text('Role'),
+                                  subtitle: Text(data['role']['name'].toString()),
+                                ),
                               ),
-                              ListTile(
-                                leading: Icon(Icons.location_on),
-                                title: Text(data['Address']),
+                              Card(
+                                                              child: ListTile(
+                                  leading: Icon(Icons.location_on, color: Colors.red,),
+                                  title: Text('Address'),
+                                  subtitle: Text(data['Address']),
+                                ),
                               ),
-                              ListTile(
-                                leading: Icon(Icons.work),
-                                title: Text(data['Job']),
+                              Card(
+                                                              child: ListTile(
+                                  leading: Icon(Icons.work, color: Colors.brown,),
+                                  title: Text('Job'),
+                                  subtitle: Text(data['Job']),
+                                ),
                               ),
-                              ListTile(
-                                leading: Icon(Icons.phone),
-                                title: Text(data['Phone']),
-                                
+                              Card(
+                                                              child: ListTile(
+                                  leading: Icon(Icons.phone,color: Colors.blueGrey,),
+                                  title: Text('Contact'),
+                                  subtitle: Text(data['Phone']),
+                                  
+                                ),
                               ),
                               SizedBox(
                                 height: 30,
@@ -321,9 +336,11 @@ class MyProfileState extends State<MyProfile> {
                               ),
                               Column(
                                 children: <Widget>[
-                                  ListTile(
-                                    leading: Icon(Icons.star),
-                                    title: Text(data['Achievements']),
+                                  Card(
+                                                                      child: ListTile(
+                                      leading: Icon(Icons.star,color: Colors.indigo,),
+                                      title: Text(data['Achievements']),
+                                    ),
                                   ),
                                 ],
                               ),

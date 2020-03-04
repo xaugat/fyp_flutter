@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     'images/teej.jpg'
   ];
 
-  final String url = 'http://192.168.0.114:8000/api/events';
+  final String url = 'http://192.168.0.112:8000/api/events';
   List userdata;
   Map data;
   String accessToken;
@@ -78,11 +78,7 @@ class _HomePageState extends State<HomePage> {
     return result;
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   this.getJsonData();
-  // }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +86,12 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.blue[900],
       appBar: AppBar(
+        elevation: 0,
           backgroundColor: Colors.blue[900],
-          title: Text('Events'),
+         title: Text('Events'),
+          
           actions: <Widget>[
+           
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
@@ -311,31 +310,72 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 20),
             ),
           ),
-          SizedBox(
-            height: 10.0,
-          ),
+          
           Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: <Widget>[
-                SizedBox(width: 10),
-                SvgPicture.asset('images/games.svg', height: 50, width: 50,),
-                SizedBox(width: 30),
-                SvgPicture.asset('images/award.svg', height: 50, width: 50,),
-                 
-                SizedBox(width: 30),
-                
-                       
-               SvgPicture.asset('images/music.svg', height: 50, width: 50,),
-                   
-                SizedBox(width: 30),
-                SvgPicture.asset('images/giftsvg.svg', height: 50, width: 50,),
+            padding: const EdgeInsets.all(8.0),
+            
+                        child: Card(
                
-                    SizedBox(width:30),
-                    SvgPicture.asset('images/photo.svg', height: 40, width: 40,),
-              ],
-            ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: <Widget>[
+                      SizedBox(width: 10),
+                      Column(
+                        children: <Widget>[
+                          SvgPicture.asset('images/award.svg', height: 35, width: 35,),
+                          SizedBox(height:10),
+                          Text('Award',style: TextStyle(color:Colors.red[900]),)
+                        ],
+                      ),
+                      
+                      SizedBox(width: 35),
+                      Column(
+                        children: <Widget>[
+                          SvgPicture.asset('images/games.svg', height: 35, width: 35,),
+                          SizedBox(height:10),
+                          Text('Games',style: TextStyle(color:Colors.red[900]))
+                        ],
+                      ),
+                       
+                      SizedBox(width: 35),
+                      
+                             
+                     Column(
+                       children: <Widget>[
+                         SvgPicture.asset('images/giftsvg.svg', height: 35, width: 35,),
+                         SizedBox(height:10),
+                         Text('Gifts',style: TextStyle(color:Colors.red[900]))
+                       ],
+                     ),
+                         
+                      SizedBox(width: 35),
+                      Column(
+                        children: <Widget>[
+                          SvgPicture.asset('images/music.svg', height: 35, width: 35,),
+                          SizedBox(height:10),
+                          Text('Music',style: TextStyle(color:Colors.red[900]))
+                        ],
+                      ),
+                      
+                     
+                          SizedBox(width:35),
+                          
+                                                  Column(
+                              children: <Widget>[
+                                SvgPicture.asset('images/photo.svg', height: 35, width: 35,),
+                                SizedBox(height:10),
+                                Text('Photo',style: TextStyle(color:Colors.red[900]))
+                              ],
+                            ),
+                          
+                    ],
+                  ),
+                ),
+              ),
+            
           ),
+          SizedBox(height:5),
           Container(
             width: 380,
             color: Colors.black,
