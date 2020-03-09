@@ -63,12 +63,22 @@ class _HomePageState extends State<HomePage> {
     print(response.body);
     var data = jsonDecode(response.body);
 
+    
+
     setState(() {
       userdata = data;
     });
     print(userdata);
     return "Success";
+    
   }
+  @override
+  void initState() {
+    super.initState();
+    
+    getJsonData();
+  }
+  
 
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
@@ -220,12 +230,17 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+            
           ),
+         
           Expanded(
+            
             child: ListView.builder(
+              
               itemCount: userdata == null ? 0 : userdata.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
+                  
                   color: Colors.black,
                   child: new Center(
                     child: new Column(
