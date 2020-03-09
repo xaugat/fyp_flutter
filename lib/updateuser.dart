@@ -68,7 +68,7 @@ class  _UpdateusersState extends State<Updateusers>{
 
   _UpdateusersState(this.token, this.getid,  this.role, this.name, this.email, this.phone, this.address,this.job, this.achievements,);
 
-   final String _url = 'http://192.168.0.112:8000/api/auth/';
+   final String _url = 'http://192.168.0.116:8000/api/auth/';
   
 
     put(data, apiUrl) async{

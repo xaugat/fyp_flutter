@@ -95,15 +95,20 @@ class LoginPageState extends State<LoginPage> {
                   child: RaisedButton(
                     color: Colors.blue[900],
                     child: Text(
-                      _isLoading ? 'Loging in..' : "Login",
+                      _isLoading ? 'Logging in...' : "Login",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                           color: Colors.white),
                     ),
                     onPressed: () {
+                      
+                      
                       setState(() {
                         _isLoading = true;
+                        
+                        
+                        
                       });
 
                       signIn(emailController.text, passwordController.text);
@@ -248,13 +253,14 @@ class LoginPageState extends State<LoginPage> {
                 builder: (BuildContext context) => HomePage(accessToken)),
             (Route<dynamic> route) => false);
       });
-      setState(() {
-        _isLoading = false;
-      });
+      
     } else {
       _showMsg(response.body);
       print(response.body);
     }
+    setState(() {
+        _isLoading = false;
+      });
   }
 }
 

@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     'images/teej.jpg'
   ];
 
-  final String url = 'http://192.168.0.112:8000/api/events';
+  final String url = 'http://192.168.0.116:8000/api/events';
   List userdata;
   Map data;
   String accessToken;
@@ -300,148 +300,148 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 10.0,
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 50),
-            child: Text(
-              'We welcome you !',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 50),
+          //   child: Text(
+          //     'We welcome you !',
+          //     style: TextStyle(
+          //         color: Colors.white,
+          //         fontWeight: FontWeight.bold,
+          //         fontSize: 20),
+          //   ),
+          // ),
           
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
             
-                        child: Card(
+          //               child: Card(
                
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(width: 10),
-                      Column(
-                        children: <Widget>[
-                          SvgPicture.asset('images/award.svg', height: 35, width: 35,),
-                          SizedBox(height:10),
-                          Text('Award',style: TextStyle(color:Colors.red[900]),)
-                        ],
-                      ),
+          //       child: Padding(
+          //         padding: const EdgeInsets.all(8.0),
+          //         child: Row(
+          //           children: <Widget>[
+          //             SizedBox(width: 10),
+          //             Column(
+          //               children: <Widget>[
+          //                 SvgPicture.asset('images/award.svg', height: 35, width: 35,),
+          //                 SizedBox(height:10),
+          //                 Text('Award',style: TextStyle(color:Colors.red[900]),)
+          //               ],
+          //             ),
                       
-                      SizedBox(width: 35),
-                      Column(
-                        children: <Widget>[
-                          SvgPicture.asset('images/games.svg', height: 35, width: 35,),
-                          SizedBox(height:10),
-                          Text('Games',style: TextStyle(color:Colors.red[900]))
-                        ],
-                      ),
+          //             SizedBox(width: 35),
+          //             Column(
+          //               children: <Widget>[
+          //                 SvgPicture.asset('images/games.svg', height: 35, width: 35,),
+          //                 SizedBox(height:10),
+          //                 Text('Games',style: TextStyle(color:Colors.red[900]))
+          //               ],
+          //             ),
                        
-                      SizedBox(width: 35),
+          //             SizedBox(width: 35),
                       
                              
-                     Column(
-                       children: <Widget>[
-                         SvgPicture.asset('images/giftsvg.svg', height: 35, width: 35,),
-                         SizedBox(height:10),
-                         Text('Gifts',style: TextStyle(color:Colors.red[900]))
-                       ],
-                     ),
+          //            Column(
+          //              children: <Widget>[
+          //                SvgPicture.asset('images/giftsvg.svg', height: 35, width: 35,),
+          //                SizedBox(height:10),
+          //                Text('Gifts',style: TextStyle(color:Colors.red[900]))
+          //              ],
+          //            ),
                          
-                      SizedBox(width: 35),
-                      Column(
-                        children: <Widget>[
-                          SvgPicture.asset('images/music.svg', height: 35, width: 35,),
-                          SizedBox(height:10),
-                          Text('Music',style: TextStyle(color:Colors.red[900]))
-                        ],
-                      ),
+          //             SizedBox(width: 35),
+          //             Column(
+          //               children: <Widget>[
+          //                 SvgPicture.asset('images/music.svg', height: 35, width: 35,),
+          //                 SizedBox(height:10),
+          //                 Text('Music',style: TextStyle(color:Colors.red[900]))
+          //               ],
+          //             ),
                       
                      
-                          SizedBox(width:35),
+          //                 SizedBox(width:35),
                           
-                                                  Column(
-                              children: <Widget>[
-                                SvgPicture.asset('images/photo.svg', height: 35, width: 35,),
-                                SizedBox(height:10),
-                                Text('Photo',style: TextStyle(color:Colors.red[900]))
-                              ],
-                            ),
+          //                                         Column(
+          //                     children: <Widget>[
+          //                       SvgPicture.asset('images/photo.svg', height: 35, width: 35,),
+          //                       SizedBox(height:10),
+          //                       Text('Photo',style: TextStyle(color:Colors.red[900]))
+          //                     ],
+          //                   ),
                           
-                    ],
-                  ),
-                ),
-              ),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
             
-          ),
-          SizedBox(height:5),
-          Container(
-            width: 380,
-            color: Colors.black,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-                carouselSlider = CarouselSlider(
-                  height: 350.0,
-                  initialPage: 0,
-                  enlargeCenterPage: true,
-                  autoPlay: true,
-                  reverse: false,
-                  enableInfiniteScroll: true,
-                  autoPlayInterval: Duration(seconds: 2),
-                  autoPlayAnimationDuration: Duration(milliseconds: 2000),
-                  pauseAutoPlayOnTouch: Duration(seconds: 10),
-                  scrollDirection: Axis.horizontal,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _current = index;
-                    });
-                  },
-                  items: imgList.map((imgUrl) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 10.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.green,
-                          ),
-                          child: Image.asset(
-                            imgUrl,
-                            fit: BoxFit.fill,
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: map<Widget>(imgList, (index, image) {
-                    return Container(
-                      width: 10.0,
-                      height: 10.0,
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _current == index ? Colors.blue : Colors.white,
-                      ),
-                    );
-                  }),
-                ),
-              ],
-            ),
-          ),
+          // ),
+          // SizedBox(height:5),
+          // Container(
+          //   width: 380,
+          //   color: Colors.black,
+          //   child: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: <Widget>[
+          //       SizedBox(
+          //         height: 10,
+          //       ),
+          //       carouselSlider = CarouselSlider(
+          //         height: 350.0,
+          //         initialPage: 0,
+          //         enlargeCenterPage: true,
+          //         autoPlay: true,
+          //         reverse: false,
+          //         enableInfiniteScroll: true,
+          //         autoPlayInterval: Duration(seconds: 2),
+          //         autoPlayAnimationDuration: Duration(milliseconds: 2000),
+          //         pauseAutoPlayOnTouch: Duration(seconds: 10),
+          //         scrollDirection: Axis.horizontal,
+          //         onPageChanged: (index) {
+          //           setState(() {
+          //             _current = index;
+          //           });
+          //         },
+          //         items: imgList.map((imgUrl) {
+          //           return Builder(
+          //             builder: (BuildContext context) {
+          //               return Container(
+          //                 width: MediaQuery.of(context).size.width,
+          //                 margin: EdgeInsets.symmetric(horizontal: 10.0),
+          //                 decoration: BoxDecoration(
+          //                   borderRadius: BorderRadius.circular(20),
+          //                   color: Colors.green,
+          //                 ),
+          //                 child: Image.asset(
+          //                   imgUrl,
+          //                   fit: BoxFit.fill,
+          //                 ),
+          //               );
+          //             },
+          //           );
+          //         }).toList(),
+          //       ),
+          //       SizedBox(
+          //         height: 5,
+          //       ),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: map<Widget>(imgList, (index, image) {
+          //           return Container(
+          //             width: 10.0,
+          //             height: 10.0,
+          //             margin:
+          //                 EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+          //             decoration: BoxDecoration(
+          //               shape: BoxShape.circle,
+          //               color: _current == index ? Colors.blue : Colors.white,
+          //             ),
+          //           );
+          //         }),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
