@@ -311,7 +311,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             
             child: RefreshIndicator(
-              onRefresh: getnext,
+              onRefresh: getJsonData,
                           child: ListView.builder(
                 controller: _scrollController,
                 
