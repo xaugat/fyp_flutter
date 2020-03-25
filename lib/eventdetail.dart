@@ -29,6 +29,7 @@ class Eventdetails extends StatefulWidget {
 }
 
 class EventDetail_State extends State<Eventdetails> {
+  Color _iconColor = Colors.white;
   String name;
   String date;
   String time;
@@ -124,8 +125,11 @@ class EventDetail_State extends State<Eventdetails> {
                          Container(
                           margin: EdgeInsets.only(left:80),
                            child: RaisedButton.icon(onPressed: (){
+                             setState(() {
+                               _iconColor = Colors.red;
+                             });
                               
-                           }, icon: Icon(Icons.favorite), label: Text('Interested')),
+                           }, icon: Icon(Icons.favorite,color: _iconColor,), label: Text('Interested')),
 
                          ),
                        ],

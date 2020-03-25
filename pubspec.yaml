@@ -33,6 +33,7 @@ dependencies:
   url_launcher:
   carousel_slider: ^1.3.0
   flutter_svg:
+  flutter_paginator: ^0.0.6
   
   
   

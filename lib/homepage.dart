@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:alumniapp/alumnilist.dart';
 import 'package:alumniapp/createEvent.dart';
 import 'package:alumniapp/eventdetail.dart';
+import 'package:alumniapp/page.dart';
 import 'package:alumniapp/profile.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
@@ -49,34 +50,100 @@ class _HomePageState extends State<HomePage> {
     'images/teej.jpg'
   ];
 
-  final String url = 'http://192.168.0.116:8000/api/events';
+  ScrollController _scrollController = new ScrollController();
+
+  final String url = 'http://192.168.0.114:8000/api/events';
+  final String urn = 'http://192.168.0.114:8000/api/search';
+  final String uri = 'http://192.168.0.114:8000/api/events?page=2';
   List userdata;
-  Map data;
+  bool _isLoading = false;
+ 
+  List data;
   String accessToken;
   _HomePageState(this.accessToken);
 
   Future<String> getJsonData() async {
-    var response = await http.get(Uri.encodeFull(url), headers: {
-      "Accept": "application/json",
-      "search": searcheventController.text
-    });
+    var response = await http
+        .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
     print(response.body);
-    var data = jsonDecode(response.body);
+
+
 
     
 
     setState(() {
-      userdata = data;
+      _isLoading = false;
+      var convertDataToJson = json.decode(response.body);
+      data = convertDataToJson['data'];
     });
-    print(userdata);
     return "Success";
+  
+    
+  }
+
+  
+
+
+  Future<String> getnext() async {
+    var response = await http
+        .get(Uri.encodeFull(uri), headers: {"Accept": "application/json"});
+    print(response.body);
+
+
+
+    
+
+    setState(() {
+
+      var convertDataToJson = json.decode(response.body);
+      data = convertDataToJson['data'];
+    });
+    return "Success";
+  
+    
+  }
+
+  Future<String> searchData() async {
+    var response = await http
+        .get(Uri.encodeFull(urn), headers: {"Accept": "application/json", "search": searcheventController.text});
+    print(response.body);
+
+     var datas = jsonDecode(response.body);
+
+    setState(() {
+      data = datas;
+    });
+    return "Success";
+  
     
   }
   @override
   void initState() {
     super.initState();
     
-    getJsonData();
+    this.getJsonData();
+
+    _scrollController.addListener((){
+      if( _scrollController.position.pixels == _scrollController.position.maxScrollExtent){
+        getnext();
+      }
+      
+      
+
+    });
+    
+  }
+  @override
+  void dispose(){
+    _scrollController.dispose();
+    super.dispose();
+  }
+  refresh(){
+     if( _scrollController.position.pixels == _scrollController.position.maxScrollExtent){
+        getnext();
+      }
+      getJsonData();
+
   }
   
 
@@ -116,7 +183,15 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            Icon(Icons.notifications_active),
+            IconButton(
+              onPressed: (){
+                Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Page(),
+                      ));
+              },
+              icon: Icon(Icons.notifications_active)),
             SizedBox(
               width: 20,
             )
@@ -205,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                    onChanged: (String text){
                     if (_debounce?.isActive ?? false) _debounce.cancel();
                     _debounce = Timer(const Duration(milliseconds: 1000),(){
-                      getJsonData();
+                      searchData();
                     });
                   },
                   controller: searcheventController,
@@ -224,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     color: Colors.black,
                     onPressed: () {
-                      getJsonData();
+                      searchData();
                     },
                   ),
                 ),
@@ -235,81 +310,87 @@ class _HomePageState extends State<HomePage> {
          
           Expanded(
             
-            child: ListView.builder(
-              
-              itemCount: userdata == null ? 0 : userdata.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  
-                  color: Colors.black,
-                  child: new Center(
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Card(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 2, right: 4),
-                            child: ListTile(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Eventdetail(
-                                        userdata[index]['event_name'],
-                                        userdata[index]['event_date'],
-                                        userdata[index]['event_time'],
-                                        userdata[index]['event_venue'],
-                                      ),
-                                    ));
-                              },
-                              leading: Icon(
-                                Icons.event_available,
-                                size: 50,
-                                color: Colors.blue[900],
-                              ),
-                              title: Text(
-                                userdata[index]['event_name'],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 18,
+            child: RefreshIndicator(
+              onRefresh: getnext,
+                          child: ListView.builder(
+                controller: _scrollController,
+                
+                
+                itemCount: data == null ? 0 : data.length,
+                
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    
+                    color: Colors.black,
+                    child: new Center(
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Card(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 2, right: 4),
+                              child: ListTile(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Eventdetail(
+                                          data[index]['event_name'],
+                                          data[index]['event_date'],
+                                          data[index]['event_time'],
+                                          data[index]['event_venue'],
+                                        ),
+                                      ));
+                                },
+                                leading: Icon(
+                                  Icons.event_available,
+                                  size: 50,
+                                  color: Colors.blue[900],
                                 ),
-                              ),
-                              subtitle: Row(
-                                children: <Widget>[
-                                  Text(
-                                    userdata[index]['event_venue'],
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 1),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    userdata[index]['event_time'],
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 1),
-                                  ),
-                                ],
-                              ),
-                              trailing: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.date_range,
+                                title: Text(
+                                  data[index]['event_name'],
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
                                     color: Colors.black,
+                                    fontSize: 18,
                                   ),
-                                  SizedBox(height: 5),
-                                  Text(userdata[index]['event_date']),
-                                ],
+                                ),
+                                subtitle: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      data[index]['event_venue'],
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 1),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      data[index]['event_time'],
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 1),
+                                    ),
+                                  ],
+                                ),
+                                trailing: Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.date_range,
+                                      color: Colors.black,
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(data[index]['event_date']),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
           SizedBox(

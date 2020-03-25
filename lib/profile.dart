@@ -61,7 +61,7 @@ class MyProfileState extends State<MyProfile> {
       print("header is $headers");
 
       http.Response response = await http.get(
-        "http://192.168.0.116:8000/api/auth/user",
+        "http://192.168.0.114:8000/api/auth/user",
         headers: headers,
       );
       data = json.decode(response.body);
