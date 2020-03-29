@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:alumniapp/alumnilist.dart';
 import 'package:alumniapp/createEvent.dart';
 import 'package:alumniapp/eventdetail.dart';
+import 'package:alumniapp/notificationPage.dart';
 import 'package:alumniapp/page.dart';
 import 'package:alumniapp/profile.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -52,9 +53,11 @@ class _HomePageState extends State<HomePage> {
 
   ScrollController _scrollController = new ScrollController();
 
+  int page = 1;
+
   final String url = 'http://192.168.0.114:8000/api/events';
   final String urn = 'http://192.168.0.114:8000/api/search';
-  final String uri = 'http://192.168.0.114:8000/api/events?page=2';
+  final String uri = 'http://192.168.0.114:8000/api/events?page=';
   List userdata;
   bool _isLoading = false;
  
@@ -84,9 +87,9 @@ class _HomePageState extends State<HomePage> {
   
 
 
-  Future<String> getnext() async {
+  Future getnext(int page) async {
     var response = await http
-        .get(Uri.encodeFull(uri), headers: {"Accept": "application/json"});
+        .get(Uri.encodeFull(uri + page.toString()), headers: {"Accept": "application/json"});
     print(response.body);
 
 
@@ -119,13 +122,16 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   void initState() {
+
+    page = page + 1;
+
     super.initState();
     
     this.getJsonData();
 
     _scrollController.addListener((){
       if( _scrollController.position.pixels == _scrollController.position.maxScrollExtent){
-        getnext();
+        getnext(page);
       }
       
       
@@ -140,7 +146,7 @@ class _HomePageState extends State<HomePage> {
   }
   refresh(){
      if( _scrollController.position.pixels == _scrollController.position.maxScrollExtent){
-        getnext();
+        getnext(page);
       }
       getJsonData();
 
@@ -188,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Page(),
+                        builder: (context) => NotificationPage(),
                       ));
               },
               icon: Icon(Icons.notifications_active)),
